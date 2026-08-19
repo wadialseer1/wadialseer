@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/عن-المدرسة'
+import { Route as Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/هيئة-المدرسة'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,31 +26,43 @@ const Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Ro
       getParentRoute: () => rootRouteImport,
     } as any,
   )
+const Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route =
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport.update(
+    {
+      id: '/هيئة-المدرسة',
+      path: '/هيئة-المدرسة',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/عن-المدرسة'
+  fullPaths: '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/عن-المدرسة'
-  id: '__root__' | '/' | '/عن-المدرسة'
+  to: '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
+  id: '__root__' | '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 
 declare module '@tanstack/react-router' {
@@ -68,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/هيئة-المدرسة': {
+      id: '/هيئة-المدرسة'
+      path: '/هيئة-المدرسة'
+      fullPath: '/هيئة-المدرسة'
+      preLoaderRoute: typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -75,6 +95,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
     Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
+    Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
