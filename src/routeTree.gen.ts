@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport } from './routes/التعليم-المهني'
 import { Route as Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/عن-المدرسة'
 import { Route as Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/هيئة-المدرسة'
 
@@ -18,6 +19,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route =
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport.update(
+    {
+      id: '/التعليم-المهني',
+      path: '/التعليم-المهني',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 const Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route =
   Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport.update(
     {
@@ -37,30 +46,34 @@ const Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Ch
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
   '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
   '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
   '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
   '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
+  fullPaths: '/' | '/التعليم-المهني' | '/عن-المدرسة' | '/هيئة-المدرسة'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
-  id: '__root__' | '/' | '/عن-المدرسة' | '/هيئة-المدرسة'
+  to: '/' | '/التعليم-المهني' | '/عن-المدرسة' | '/هيئة-المدرسة'
+  id: '__root__' | '/' | '/التعليم-المهني' | '/عن-المدرسة' | '/هيئة-المدرسة'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route: typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
   Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
   Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
@@ -72,6 +85,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/التعليم-المهني': {
+      id: '/التعليم-المهني'
+      path: '/التعليم-المهني'
+      fullPath: '/التعليم-المهني'
+      preLoaderRoute: typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/عن-المدرسة': {
@@ -93,6 +113,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route:
+    Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route,
   Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
     Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
   Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
