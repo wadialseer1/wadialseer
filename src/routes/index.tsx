@@ -1,24 +1,71 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import {
+  AboutSection,
+  BtecSection,
+  ContactSection,
+  Hero,
+  InitiativesSection,
+  LocationSection,
+  PlatformsSection,
+  ValuesSection,
+} from "@/components/sections";
+import { school } from "@/data/school";
+
+const title = "مدرسة أبو السوس الثانوية للبنين | الموقع الرسمي";
+const description =
+  "الموقع الرسمي لمدرسة أبو السوس الثانوية للبنين: الرؤية والرسالة، الهيئة الإدارية والتدريسية، نظام BTEC، المبادرات المدرسية والمنصات التعليمية.";
+const url = "https://abusus.lovable.app/";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:image", content: school.heroImage },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: school.heroImage },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "School",
+          name: school.name,
+          description: school.vision,
+          telephone: school.phone,
+          email: school.email,
+          sameAs: [school.facebook],
+          url,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: school.coords.lat,
+            longitude: school.coords.lng,
+          },
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <AboutSection />
+      <ValuesSection />
+      <BtecSection />
+      <InitiativesSection />
+      <LocationSection />
+      <PlatformsSection />
+      <ContactSection />
+    </>
   );
 }
