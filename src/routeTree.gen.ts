@@ -10,33 +10,149 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport } from './routes/التعليم-المهني'
+import { Route as Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578RouteImport } from './routes/المبادرات'
+import { Route as Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577RouteImport } from './routes/المنصات-التعليمية'
+import { Route as Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575RouteImport } from './routes/تواصل-معنا'
+import { Route as Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/عن-المدرسة'
+import { Route as Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/موقع-المدرسة'
+import { Route as Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport } from './routes/هيئة-المدرسة'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route =
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport.update(
+    {
+      id: '/التعليم-المهني',
+      path: '/التعليم-المهني',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route =
+  Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578RouteImport.update(
+    {
+      id: '/المبادرات',
+      path: '/المبادرات',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route =
+  Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577RouteImport.update(
+    {
+      id: '/المنصات-التعليمية',
+      path: '/المنصات-التعليمية',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route =
+  Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575RouteImport.update(
+    {
+      id: '/تواصل-معنا',
+      path: '/تواصل-معنا',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route =
+  Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport.update(
+    {
+      id: '/عن-المدرسة',
+      path: '/عن-المدرسة',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route =
+  Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport.update(
+    {
+      id: '/موقع-المدرسة',
+      path: '/موقع-المدرسة',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
+const Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route =
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport.update(
+    {
+      id: '/هيئة-المدرسة',
+      path: '/هيئة-المدرسة',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
+  '/المبادرات': typeof Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route
+  '/المنصات-التعليمية': typeof Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route
+  '/تواصل-معنا': typeof Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route
+  '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/موقع-المدرسة': typeof Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
+  '/المبادرات': typeof Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route
+  '/المنصات-التعليمية': typeof Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route
+  '/تواصل-معنا': typeof Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route
+  '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/موقع-المدرسة': typeof Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/التعليم-المهني': typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
+  '/المبادرات': typeof Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route
+  '/المنصات-التعليمية': typeof Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route
+  '/تواصل-معنا': typeof Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route
+  '/عن-المدرسة': typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/موقع-المدرسة': typeof Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  '/هيئة-المدرسة': typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/التعليم-المهني'
+    | '/المبادرات'
+    | '/المنصات-التعليمية'
+    | '/تواصل-معنا'
+    | '/عن-المدرسة'
+    | '/موقع-المدرسة'
+    | '/هيئة-المدرسة'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/التعليم-المهني'
+    | '/المبادرات'
+    | '/المنصات-التعليمية'
+    | '/تواصل-معنا'
+    | '/عن-المدرسة'
+    | '/موقع-المدرسة'
+    | '/هيئة-المدرسة'
+  id:
+    | '__root__'
+    | '/'
+    | '/التعليم-المهني'
+    | '/المبادرات'
+    | '/المنصات-التعليمية'
+    | '/تواصل-معنا'
+    | '/عن-المدرسة'
+    | '/موقع-المدرسة'
+    | '/هيئة-المدرسة'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route: typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route
+  Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route: typeof Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route
+  Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route: typeof Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route
+  Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route: typeof Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route
+  Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route: typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +164,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/التعليم-المهني': {
+      id: '/التعليم-المهني'
+      path: '/التعليم-المهني'
+      fullPath: '/التعليم-المهني'
+      preLoaderRoute: typeof Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/المبادرات': {
+      id: '/المبادرات'
+      path: '/المبادرات'
+      fullPath: '/المبادرات'
+      preLoaderRoute: typeof Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/المنصات-التعليمية': {
+      id: '/المنصات-التعليمية'
+      path: '/المنصات-التعليمية'
+      fullPath: '/المنصات-التعليمية'
+      preLoaderRoute: typeof Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/تواصل-معنا': {
+      id: '/تواصل-معنا'
+      path: '/تواصل-معنا'
+      fullPath: '/تواصل-معنا'
+      preLoaderRoute: typeof Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/عن-المدرسة': {
+      id: '/عن-المدرسة'
+      path: '/عن-المدرسة'
+      fullPath: '/عن-المدرسة'
+      preLoaderRoute: typeof Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/موقع-المدرسة': {
+      id: '/موقع-المدرسة'
+      path: '/موقع-المدرسة'
+      fullPath: '/موقع-المدرسة'
+      preLoaderRoute: typeof Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/هيئة-المدرسة': {
+      id: '/هيئة-المدرسة'
+      path: '/هيئة-المدرسة'
+      fullPath: '/هيئة-المدرسة'
+      preLoaderRoute: typeof Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route:
+    Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1575Char1604Char1605Char1607Char1606Char1610Route,
+  Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route:
+    Char1575Char1604Char1605Char1576Char1575Char1583Char1585Char1575Char1578Route,
+  Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route:
+    Char1575Char1604Char1605Char1606Char1589Char1575Char1578Char1575Char1604Char1578Char1593Char1604Char1610Char1605Char1610Char1577Route,
+  Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route:
+    Char1578Char1608Char1575Char1589Char1604Char1605Char1593Char1606Char1575Route,
+  Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
+    Char1593Char1606Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
+  Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
+    Char1605Char1608Char1602Char1593Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
+  Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route:
+    Char1607Char1610Char1574Char1577Char1575Char1604Char1605Char1583Char1585Char1587Char1577Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
