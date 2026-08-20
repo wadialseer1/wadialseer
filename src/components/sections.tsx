@@ -1,18 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowLeft,
-  Calendar,
-  ExternalLink,
-  Mail,
-  MapPin,
-  Navigation,
-  Phone,
-  Quote,
-  Sparkles,
-} from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
+import { useLightbox } from "@/components/Lightbox";
 import logo from "@/assets/logo.png.asset.json";
 import {
   administration,
@@ -41,12 +31,13 @@ export function SectionTitle({
   return (
     <Reveal className="mx-auto max-w-3xl text-center">
       {eyebrow && (
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 text-xs font-semibold text-primary">
-          <Sparkles className="h-3.5 w-3.5" />
+        <span className="inline-block border-b-2 border-primary pb-1 text-sm font-bold tracking-wide text-primary">
           {eyebrow}
         </span>
       )}
-      <h2 className="mt-5 text-3xl font-extrabold sm:text-4xl lg:text-5xl">{title}</h2>
+      <h2 className="mt-5 font-display text-3xl font-extrabold leading-snug sm:text-4xl lg:text-5xl">
+        {title}
+      </h2>
       {description && (
         <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
           {description}
@@ -121,7 +112,6 @@ export function AboutSection() {
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <Reveal>
             <article className="card-premium h-full p-8 sm:p-10">
-              <Quote className="h-8 w-8 text-primary" />
               <h3 className="mt-5 text-2xl font-extrabold sm:text-3xl">رؤية المدرسة</h3>
               <p className="mt-4 text-base leading-loose text-muted-foreground sm:text-lg">
                 {school.vision}
@@ -130,7 +120,6 @@ export function AboutSection() {
           </Reveal>
           <Reveal delay={140}>
             <article className="card-premium h-full p-8 sm:p-10">
-              <Sparkles className="h-8 w-8 text-primary" />
               <h3 className="mt-5 text-2xl font-extrabold sm:text-3xl">رسالة المدرسة</h3>
               <ul className="mt-4 space-y-4">
                 {school.missionPoints.map((point) => (
@@ -148,31 +137,13 @@ export function AboutSection() {
   );
 }
 
-export function ValuesSection() {
+function PersonCard({ person, onOpen }: { person: Person; onOpen: () => void }) {
   return (
-    <section className="section-pad border-y border-border bg-card/40">
-      <div className="container-site">
-        <SectionTitle eyebrow="قيمنا" title="القيم الجوهرية" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {school.values.map((value, i) => (
-            <Reveal key={value} delay={i * 70}>
-              <div className="card-premium flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/15 text-lg font-black text-primary">
-                  {i + 1}
-                </span>
-                <h3 className="text-lg font-bold sm:text-xl">{value}</h3>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PersonCard({ person }: { person: Person }) {
-  return (
-    <div className="card-premium w-64 shrink-0 overflow-hidden sm:w-auto">
+    <button
+      type="button"
+      onClick={onOpen}
+      className="card-premium w-64 shrink-0 overflow-hidden text-right sm:w-auto"
+    >
       <img
         src={person.image}
         alt={`${person.name} - ${person.role}`}
@@ -183,25 +154,30 @@ function PersonCard({ person }: { person: Person }) {
         <h3 className="text-lg font-bold">{person.name}</h3>
         <p className="mt-1 text-sm text-primary">{person.role}</p>
       </div>
-    </div>
+    </button>
   );
 }
 
 function PeopleRow({ people }: { people: Person[] }) {
+  const { open, view } = useLightbox(
+    people.map((person) => ({ src: person.image, caption: `${person.name} — ${person.role}` })),
+  );
+
   return (
     <>
       <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 sm:hidden">
-        {people.map((person) => (
-          <PersonCard key={person.name} person={person} />
+        {people.map((person, i) => (
+          <PersonCard key={person.name} person={person} onOpen={() => open(i)} />
         ))}
       </div>
       <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {people.map((person, i) => (
           <Reveal key={person.name} delay={(i % 4) * 60}>
-            <PersonCard person={person} />
+            <PersonCard person={person} onOpen={() => open(i)} />
           </Reveal>
         ))}
       </div>
+      {view}
     </>
   );
 }
@@ -255,6 +231,31 @@ export function BtecSection() {
   );
 }
 
+function InitiativeGallery({ title, images }: { title: string; images: string[] }) {
+  const { open, view } = useLightbox(images.map((src) => ({ src, caption: title })));
+
+  return (
+    <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {images.map((src, index) => (
+        <button
+          key={src}
+          type="button"
+          onClick={() => open(index)}
+          className="overflow-hidden rounded-xl border border-border transition-opacity hover:opacity-85"
+        >
+          <img
+            src={src}
+            alt={`${title} - صورة ${index + 1}`}
+            className="aspect-square w-full bg-secondary object-cover"
+            loading="lazy"
+          />
+        </button>
+      ))}
+      {view}
+    </div>
+  );
+}
+
 export function InitiativesSection() {
   return (
     <section className="section-pad">
@@ -266,8 +267,7 @@ export function InitiativesSection() {
               <article className="relative card-premium p-6 sm:p-9">
                 <span className="absolute -right-[calc(1.5rem+9px)] top-10 hidden h-4 w-4 rounded-full bg-primary shadow-gold sm:-right-[calc(2.5rem+9px)] sm:block" />
                 {item.date && (
-                  <p className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1.5 text-xs font-semibold text-primary">
-                    <Calendar className="h-3.5 w-3.5" />
+                  <p className="inline-block rounded-full bg-secondary px-3 py-1.5 text-xs font-semibold text-primary">
                     {item.date}
                   </p>
                 )}
@@ -275,17 +275,7 @@ export function InitiativesSection() {
                 <p className="mt-3 text-base leading-loose text-muted-foreground">
                   {item.description}
                 </p>
-                <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {item.images.map((src, index) => (
-                    <img
-                      key={src}
-                      src={src}
-                      alt={`${item.title} - صورة ${index + 1}`}
-                      className="aspect-square w-full rounded-xl bg-secondary object-cover"
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
+                <InitiativeGallery title={item.title} images={item.images} />
               </article>
             </Reveal>
           ))}
@@ -299,7 +289,7 @@ export function LocationSection() {
   return (
     <section className="section-pad border-y border-border bg-card/40" id="location">
       <div className="container-site">
-        <SectionTitle eyebrow="📍 الوصول إلينا" title="موقع مدرسة أبو السوس الثانوية للبنين" />
+        <SectionTitle eyebrow="الوصول إلينا" title="موقع مدرسة أبو السوس الثانوية للبنين" />
 
         <Reveal className="mt-12">
           <div className="overflow-hidden rounded-3xl border border-border shadow-premium">
@@ -308,7 +298,7 @@ export function LocationSection() {
                 <h3 className="text-2xl font-extrabold sm:text-3xl">{school.name}</h3>
                 <p className="mt-3 flex items-center gap-2 text-base text-muted-foreground">
                   <MapPin className="h-5 w-5 shrink-0 text-primary" />
-                  📍 موقع المدرسة على الخريطة
+                  موقع المدرسة على الخريطة
                 </p>
                 <p dir="ltr" className="mt-2 text-sm text-muted-foreground">
                   {school.coords.lat}, {school.coords.lng}
@@ -363,14 +353,20 @@ export function PlatformsSection() {
           {platforms.map((platform, i) => (
             <Reveal key={platform.url} delay={i * 90}>
               <article className="card-premium flex h-full flex-col items-center gap-4 p-8 text-center">
-                <img
-                  src={platform.logo}
-                  alt={`شعار ${platform.short}`}
-                  className="h-16 w-16 rounded-2xl bg-foreground/95 object-contain p-2"
-                  loading="lazy"
-                  width={64}
-                  height={64}
-                />
+                {platform.logo ? (
+                  <img
+                    src={platform.logo}
+                    alt={`شعار ${platform.short}`}
+                    className="h-16 w-16 rounded-2xl bg-foreground/95 object-contain p-2"
+                    loading="lazy"
+                    width={64}
+                    height={64}
+                  />
+                ) : (
+                  <span className="grid h-16 w-16 place-items-center rounded-2xl bg-primary/15 font-display text-xl font-black text-primary">
+                    {platform.short}
+                  </span>
+                )}
                 <h3 className="text-lg font-bold">{platform.name}</h3>
                 <p className="text-sm text-muted-foreground">{platform.description}</p>
                 <a
@@ -392,120 +388,53 @@ export function PlatformsSection() {
 }
 
 export function ContactSection() {
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent(`رسالة من ${String(data.get("name") ?? "")}`);
-    const body = encodeURIComponent(
-      `${String(data.get("message") ?? "")}\n\nالبريد الإلكتروني: ${String(data.get("email") ?? "")}`,
-    );
-    window.location.href = `mailto:${school.email}?subject=${subject}&body=${body}`;
-    setSent(true);
-  }
-
   return (
     <section className="section-pad border-t border-border bg-card/40" id="contact">
       <div className="container-site">
         <SectionTitle eyebrow="تواصل معنا" title="نحن هنا للإجابة على استفساراتكم" />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-          <div className="grid gap-5">
-            <Reveal>
-              <a href={`tel:${school.phone}`} className="card-premium flex items-center gap-4 p-6">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
-                  <Phone className="h-5 w-5" />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal>
+            <a href={`tel:${school.phone}`} className="card-premium flex h-full items-center gap-4 p-6">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
+                <Phone className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm text-muted-foreground">اتصل بنا</span>
+                <span dir="ltr" className="block truncate text-lg font-bold">
+                  {school.phone}
                 </span>
-                <span className="min-w-0">
-                  <span className="block text-sm text-muted-foreground">اتصل بنا</span>
-                  <span dir="ltr" className="block truncate text-lg font-bold">
-                    {school.phone}
-                  </span>
+              </span>
+            </a>
+          </Reveal>
+          <Reveal delay={100}>
+            <a href={`mailto:${school.email}`} className="card-premium flex h-full items-center gap-4 p-6">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
+                <Mail className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm text-muted-foreground">البريد الإلكتروني</span>
+                <span dir="ltr" className="block truncate text-lg font-bold">
+                  {school.email}
                 </span>
-              </a>
-            </Reveal>
-            <Reveal delay={100}>
-              <a href={`mailto:${school.email}`} className="card-premium flex items-center gap-4 p-6">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
-                  <Mail className="h-5 w-5" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm text-muted-foreground">البريد الإلكتروني</span>
-                  <span dir="ltr" className="block truncate text-lg font-bold">
-                    {school.email}
-                  </span>
-                </span>
-              </a>
-            </Reveal>
-            <Reveal delay={200}>
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-premium flex items-center gap-4 p-6"
-              >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
-                  <MapPin className="h-5 w-5" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm text-muted-foreground">موقع المدرسة</span>
-                  <span className="block truncate text-lg font-bold">{school.name}</span>
-                </span>
-              </a>
-            </Reveal>
-          </div>
-
-          <Reveal delay={140}>
-            <form onSubmit={handleSubmit} className="card-premium grid gap-4 p-7 sm:p-9">
-              <div className="grid gap-2">
-                <label htmlFor="name" className="text-sm font-semibold">
-                  الاسم
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  required
-                  className="h-12 rounded-xl border border-input bg-background px-4 text-base outline-none focus:border-primary"
-                />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="email" className="text-sm font-semibold">
-                  البريد الإلكتروني
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  dir="ltr"
-                  className="h-12 rounded-xl border border-input bg-background px-4 text-base outline-none focus:border-primary"
-                />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="message" className="text-sm font-semibold">
-                  الرسالة
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  className="rounded-xl border border-input bg-background p-4 text-base outline-none focus:border-primary"
-                />
-              </div>
-              <button
-                type="submit"
-                className="h-13 rounded-xl bg-primary px-6 text-base font-bold text-primary-foreground shadow-gold transition-transform hover:scale-[1.02]"
-              >
-                إرسال
-              </button>
-              {sent && (
-                <p className="text-sm text-primary">
-                  تم تجهيز رسالتك في برنامج البريد الإلكتروني لديك.
-                </p>
-              )}
-            </form>
+              </span>
+            </a>
+          </Reveal>
+          <Reveal delay={200}>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-premium flex h-full items-center gap-4 p-6"
+            >
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
+                <MapPin className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm text-muted-foreground">موقع المدرسة</span>
+                <span className="block truncate text-lg font-bold">{school.name}</span>
+              </span>
+            </a>
           </Reveal>
         </div>
       </div>
