@@ -88,14 +88,14 @@ export const btecMajors = [
   {
     title: "تكنولوجيا المعلومات",
     subtitle: "BTEC Information Technology",
-    image: wide("18283167/902663_260495.jpg"),
+    image: btecItImage,
     description:
       "تخصص تكنولوجيا المعلومات في نظام BTEC البريطاني هو واحد من البرامج التعليمية التي تركز على تقديم مهارات ومفاهيم أساسية في مجال تكنولوجيا المعلومات. يتناول التخصص جوانب متعددة بالبرمجة والرسومات الرقمية والرسوم المتحركة وتصميم مواقع الويب والتطبيقات والألعاب وشبكات الحاسوب",
   },
   {
     title: "إدارة الأعمال",
     subtitle: "BTEC Business Administration",
-    image: wide("18283167/259329_19922.jpg"),
+    image: btecBusinessImage,
     description:
       "تخصص إدارة الأعمال في نظام BTEC البريطاني هو واحد من البرامج التعليمية التي تركز على تقديم مهارات ومفاهيم أساسية في مجال إدارة الأعمال. يتناول التخصص جوانب متعددة بالتسويق والخدمات اللوجستية وريادة الأعمال",
   },
@@ -152,7 +152,13 @@ export const initiatives = [
   },
 ];
 
-export const platforms = [
+export const platforms: {
+  name: string;
+  short: string;
+  description: string;
+  url: string;
+  logo?: string;
+}[] = [
   {
     name: "أجيال – منصة وزارة التربية والتعليم",
     short: "أجيال",
@@ -165,7 +171,6 @@ export const platforms = [
     short: "سراج",
     description: "المساعد الدراسي الذكي.",
     url: "https://siraj.moe.gov.jo/",
-    logo: "https://www.google.com/s2/favicons?domain=siraj.moe.gov.jo&sz=128",
   },
   {
     name: "وزارة التربية والتعليم الأردنية",
