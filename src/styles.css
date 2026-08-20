@@ -39,8 +39,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Tajawal", "Cairo", ui-sans-serif, sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Almarai", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+
 }
 
 :root {
