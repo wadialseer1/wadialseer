@@ -8,7 +8,6 @@ import {
   InitiativesSection,
   LocationSection,
   PlatformsSection,
-  ValuesSection,
 } from "@/components/sections";
 import { school } from "@/data/school";
 
@@ -60,7 +59,6 @@ function Index() {
     <>
       <Hero />
       <AboutSection />
-      <ValuesSection />
       <BtecSection />
       <InitiativesSection />
       <LocationSection />

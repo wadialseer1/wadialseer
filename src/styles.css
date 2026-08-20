@@ -39,8 +39,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Tajawal", "Cairo", ui-sans-serif, sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Almarai", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+
 }
 
 :root {
@@ -96,14 +97,23 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
   h1,
   h2,
-  h3 {
-    letter-spacing: -0.01em;
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.35;
+    letter-spacing: 0;
   }
+
 }
 
 @utility surface-hero {
