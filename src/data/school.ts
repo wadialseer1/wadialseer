@@ -1,9 +1,13 @@
 // جميع المحتويات مأخوذة من الموقع الأصلي للمدرسة: https://abusos.mystrikingly.com/
 // لا يتم إضافة أي معلومات غير موجودة في المصدر.
 
+import btecBusinessImage from "@/assets/btec-business.jpg";
+import btecItImage from "@/assets/btec-it.jpg";
+
 const CDN = "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload";
 const wide = (id: string) => `${CDN}/c_limit,fl_lossy,h_1400,w_1600,f_auto,q_auto/${id}`;
 const portrait = (id: string) => `${CDN}/c_limit,fl_lossy,h_900,w_900,f_auto,q_auto/${id}`;
+
 
 export const school = {
   name: "مدرسة أبو السوس الثانوية للبنين",
