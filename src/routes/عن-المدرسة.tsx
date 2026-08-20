@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { AboutSection, ValuesSection } from "@/components/sections";
+import { AboutSection } from "@/components/sections";
 
 const title = "عن المدرسة — مدرسة أبو السوس الثانوية للبنين";
 const description =
@@ -28,7 +28,6 @@ function AboutPage() {
     <>
       <h1 className="sr-only">عن مدرسة أبو السوس الثانوية للبنين</h1>
       <AboutSection />
-      <ValuesSection />
     </>
   );
 }
