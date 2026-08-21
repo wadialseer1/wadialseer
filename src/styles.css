@@ -2,7 +2,14 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "SchoolAlt";
+  src: url("/__l5e/assets-v1/c55fda66-6727-4089-b02f-c3ce512c271a/ip1.ttf") format("truetype");
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
+
 
 /*
  * هوية مدرسة أبو السوس الثانوية للبنين
@@ -72,6 +79,9 @@
   --accent-foreground: oklch(0.97 0.008 250);
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 250);
+  /* لون مميز للتواريخ وأسماء المدراء */
+  --info: oklch(0.82 0.1 195);
+
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: var(--gold);
