@@ -77,12 +77,17 @@ export function useLightbox(items: LightboxItem[]) {
           </>
         )}
 
-        <figure className="max-h-full w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+        <figure
+          className="lightbox-figure max-h-full w-full max-w-4xl"
+          onClick={(e) => e.stopPropagation()}
+        >
           <img
+            key={items[index]!.src}
             src={items[index]!.src}
             alt={items[index]!.caption ?? ""}
-            className="mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-premium"
+            className="lightbox-figure mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-premium"
           />
+
           {items[index]!.caption && (
             <figcaption className="mt-4 text-center text-sm font-semibold text-foreground/90">
               {items[index]!.caption}
