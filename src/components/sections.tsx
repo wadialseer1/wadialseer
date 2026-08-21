@@ -81,7 +81,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={220}>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
-              {school.vision}
+              {school.tagline}
             </p>
           </Reveal>
           <Reveal delay={320}>

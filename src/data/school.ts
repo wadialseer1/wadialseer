@@ -38,6 +38,8 @@ export const school = {
   email: "alsoos114369@hotmail.com",
   facebook: "https://www.facebook.com/profile.php?id=100080898687099",
   coords: { lat: 31.926177081810046, lng: 35.796418848660664 },
+  tagline:
+    "مدرسة ثانوية شاملة للبنين في لواء وادي السير، أُنشئت عام 2017 بمكرمة ملكية سامية لخدمة أبناء منطقة أبو السوس والذراع.",
   credit: "تم إنشاؤه بواسطة محمد قصراوي",
 };
 
