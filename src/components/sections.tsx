@@ -263,6 +263,34 @@ function InitiativeGallery({ title, images }: { title: string; images: string[] 
   );
 }
 
+const highlightedNames = [
+  "محمود السكارنة",
+  "محمود السكارنه",
+  "محمد صندوقة",
+  "نسرين الشيخ",
+  "محمد الصالحي",
+  "اسامه العقيل",
+  "ليث المناصير",
+  "روحيه سعد الدين",
+];
+
+function HighlightNames({ text }: { text: string }) {
+  const parts = text.split(new RegExp(`(${highlightedNames.join("|")})`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        highlightedNames.includes(part) ? (
+          <strong key={i} className="font-bold text-info">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
 export function InitiativesSection() {
   return (
     <section className="section-pad">
@@ -274,18 +302,23 @@ export function InitiativesSection() {
               <article className="relative card-premium p-6 sm:p-9">
                 <span className="absolute -right-[calc(1.5rem+9px)] top-10 hidden h-4 w-4 rounded-full bg-primary shadow-gold sm:-right-[calc(2.5rem+9px)] sm:block" />
                 {item.date && (
-                  <p className="inline-block rounded-full bg-secondary px-3 py-1.5 text-xs font-semibold text-primary">
+                  <p className="inline-block rounded-full border border-info/30 bg-info/10 px-3 py-1.5 text-xs font-bold text-info">
                     {item.date}
                   </p>
                 )}
                 <h3 className="mt-4 text-xl font-extrabold sm:text-2xl">{item.title}</h3>
                 <p className="mt-3 text-base leading-loose text-muted-foreground">
-                  {item.description}
+                  <HighlightNames text={item.description} />
                 </p>
                 <InitiativeGallery title={item.title} images={item.images} />
               </article>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+
         </div>
       </div>
     </section>
