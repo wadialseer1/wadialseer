@@ -41,8 +41,11 @@
   --color-ring: var(--ring);
   --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Almarai", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+  --font-alt: "SchoolAlt", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+  --color-info: var(--info);
 
 }
+
 
 :root {
   --radius: 0.875rem;
