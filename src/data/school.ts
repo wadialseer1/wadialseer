@@ -3,10 +3,15 @@
 
 import btecBusinessImage from "@/assets/btec-business.jpg";
 import btecItImage from "@/assets/btec-it.jpg";
+import ajyalLogo from "@/assets/ajyal-logo.png.asset.json";
+import moeLogo from "@/assets/moe-logo.jpg.asset.json";
+import sirajLogo from "@/assets/siraj-logo.png.asset.json";
+import schoolLogo from "@/assets/logo.png.asset.json";
 
 const CDN = "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload";
 const wide = (id: string) => `${CDN}/c_limit,fl_lossy,h_1400,w_1600,f_auto,q_auto/${id}`;
 const portrait = (id: string) => `${CDN}/c_limit,fl_lossy,h_900,w_900,f_auto,q_auto/${id}`;
+
 
 
 export const school = {
