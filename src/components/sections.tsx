@@ -9,15 +9,18 @@ import {
   btecIntro,
   btecMajors,
   directionsUrl,
+  history,
   initiatives,
   mapEmbedUrl,
   mapsUrl,
   platforms,
   routes,
   school,
+  schoolFacts,
   teachers,
   type Person,
 } from "@/data/school";
+
 
 export function SectionTitle({
   eyebrow,
@@ -78,7 +81,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={220}>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
-              {school.vision}
+              {school.tagline}
             </p>
           </Reveal>
           <Reveal delay={320}>
@@ -108,27 +111,30 @@ export function AboutSection() {
   return (
     <section className="section-pad" id="about">
       <div className="container-site">
-        <SectionTitle eyebrow="عن المدرسة" title="رؤيتنا ورسالتنا" />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          <Reveal>
+        <SectionTitle eyebrow="عن المدرسة" title="نبذة عن المدرسة" />
+        <div className="mt-12 grid gap-6 lg:grid-cols-5">
+          <Reveal className="lg:col-span-3">
             <article className="card-premium h-full p-8 sm:p-10">
-              <h3 className="mt-5 text-2xl font-extrabold sm:text-3xl">رؤية المدرسة</h3>
-              <p className="mt-4 text-base leading-loose text-muted-foreground sm:text-lg">
-                {school.vision}
+              <h3 className="text-2xl font-extrabold sm:text-3xl">تأسيس المدرسة</h3>
+              <p className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg">
+                {history}
               </p>
             </article>
           </Reveal>
-          <Reveal delay={140}>
+          <Reveal delay={140} className="lg:col-span-2">
             <article className="card-premium h-full p-8 sm:p-10">
-              <h3 className="mt-5 text-2xl font-extrabold sm:text-3xl">رسالة المدرسة</h3>
-              <ul className="mt-4 space-y-4">
-                {school.missionPoints.map((point) => (
-                  <li key={point} className="flex gap-3 text-base leading-loose text-muted-foreground sm:text-lg">
-                    <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                    {point}
-                  </li>
+              <h3 className="text-2xl font-extrabold sm:text-3xl">بيانات المدرسة</h3>
+              <dl className="mt-5 divide-y divide-border">
+                {schoolFacts.map((fact) => (
+                  <div
+                    key={fact.label}
+                    className="flex flex-wrap items-baseline justify-between gap-2 py-3"
+                  >
+                    <dt className="text-sm text-muted-foreground">{fact.label}</dt>
+                    <dd className="font-bold text-info">{fact.value}</dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
             </article>
           </Reveal>
         </div>
@@ -136,6 +142,7 @@ export function AboutSection() {
     </section>
   );
 }
+
 
 function PersonCard({ person, onOpen }: { person: Person; onOpen: () => void }) {
   return (
@@ -256,6 +263,34 @@ function InitiativeGallery({ title, images }: { title: string; images: string[] 
   );
 }
 
+const highlightedNames = [
+  "محمود السكارنة",
+  "محمود السكارنه",
+  "محمد صندوقة",
+  "نسرين الشيخ",
+  "محمد الصالحي",
+  "اسامه العقيل",
+  "ليث المناصير",
+  "روحيه سعد الدين",
+];
+
+function HighlightNames({ text }: { text: string }) {
+  const parts = text.split(new RegExp(`(${highlightedNames.join("|")})`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        highlightedNames.includes(part) ? (
+          <strong key={i} className="font-bold text-info">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
 export function InitiativesSection() {
   return (
     <section className="section-pad">
@@ -267,13 +302,13 @@ export function InitiativesSection() {
               <article className="relative card-premium p-6 sm:p-9">
                 <span className="absolute -right-[calc(1.5rem+9px)] top-10 hidden h-4 w-4 rounded-full bg-primary shadow-gold sm:-right-[calc(2.5rem+9px)] sm:block" />
                 {item.date && (
-                  <p className="inline-block rounded-full bg-secondary px-3 py-1.5 text-xs font-semibold text-primary">
+                  <p className="inline-block rounded-full border border-info/30 bg-info/10 px-3 py-1.5 text-xs font-bold text-info">
                     {item.date}
                   </p>
                 )}
                 <h3 className="mt-4 text-xl font-extrabold sm:text-2xl">{item.title}</h3>
                 <p className="mt-3 text-base leading-loose text-muted-foreground">
-                  {item.description}
+                  <HighlightNames text={item.description} />
                 </p>
                 <InitiativeGallery title={item.title} images={item.images} />
               </article>

@@ -2,7 +2,14 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "SchoolAlt";
+  src: url("/__l5e/assets-v1/c55fda66-6727-4089-b02f-c3ce512c271a/ip1.ttf") format("truetype");
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
+
 
 /*
  * هوية مدرسة أبو السوس الثانوية للبنين
@@ -41,8 +48,11 @@
   --color-ring: var(--ring);
   --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Almarai", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+  --font-alt: "SchoolAlt", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
+  --color-info: var(--info);
 
 }
+
 
 :root {
   --radius: 0.875rem;
@@ -69,6 +79,9 @@
   --accent-foreground: oklch(0.97 0.008 250);
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 250);
+  /* لون مميز للتواريخ وأسماء المدراء */
+  --info: oklch(0.82 0.1 195);
+
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
   --ring: var(--gold);
@@ -178,5 +191,46 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+@utility font-alt {
+  font-family: var(--font-alt);
+  letter-spacing: 0;
+}
+
+/* النصوص الثانوية بالخط المخصص */
+@layer base {
+  p.text-muted-foreground,
+  .text-muted-foreground {
+    font-family: var(--font-alt);
+  }
+}
+
+@utility lightbox-in {
+  animation: lightbox-fade 0.25s ease both;
+}
+
+@utility lightbox-figure {
+  animation: lightbox-zoom 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

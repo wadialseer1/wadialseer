@@ -31,7 +31,7 @@ export function SiteFooter() {
             <span className="text-base font-bold">{school.name}</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-loose text-muted-foreground">
-            {school.vision}
+            {school.tagline}
           </p>
         </div>
 

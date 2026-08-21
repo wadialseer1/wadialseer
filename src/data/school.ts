@@ -3,10 +3,15 @@
 
 import btecBusinessImage from "@/assets/btec-business.jpg";
 import btecItImage from "@/assets/btec-it.jpg";
+import ajyalLogo from "@/assets/ajyal-logo.png.asset.json";
+import moeLogo from "@/assets/moe-logo.jpg.asset.json";
+import sirajLogo from "@/assets/siraj-logo.png.asset.json";
+import schoolLogo from "@/assets/logo.png.asset.json";
 
 const CDN = "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload";
 const wide = (id: string) => `${CDN}/c_limit,fl_lossy,h_1400,w_1600,f_auto,q_auto/${id}`;
 const portrait = (id: string) => `${CDN}/c_limit,fl_lossy,h_900,w_900,f_auto,q_auto/${id}`;
+
 
 
 export const school = {
@@ -33,6 +38,8 @@ export const school = {
   email: "alsoos114369@hotmail.com",
   facebook: "https://www.facebook.com/profile.php?id=100080898687099",
   coords: { lat: 31.926177081810046, lng: 35.796418848660664 },
+  tagline:
+    "مدرسة ثانوية شاملة للبنين في لواء وادي السير، أُنشئت عام 2017 بمكرمة ملكية سامية لخدمة أبناء منطقة أبو السوس والذراع.",
   credit: "تم إنشاؤه بواسطة محمد قصراوي",
 };
 
@@ -152,6 +159,19 @@ export const initiatives = [
   },
 ];
 
+export const history =
+  "بحسب تقرير صحفي من عام 2016، المدرسة أُنشئت بمكرمة ملكية سامية، على قطعة أرض مملوكة لوزارة التربية، وكان الهدف إنشاء مدرسة ثانوية للذكور لخدمة أبناء منطقة أبو السوس والذراع. ويذكر التقرير أن الأرض تقع في قطعة رقم 143، حوض 9، المعلقة من أراضي غرب عمّان/قرية البصة – منطقة الذراع أبو السوس/لواء وادي السير، وأن مساحة الأرض كانت حوالي 5.5 دونم.";
+
+export const schoolFacts: { label: string; value: string }[] = [
+  { label: "الرقم الوطني", value: "114369" },
+  { label: "الإسم بالعربية", value: "ابو السوس الثانوية الشاملة للبنين" },
+  { label: "مديرية التعليم", value: "لواء وادي السير" },
+  { label: "وقت المدرسة", value: "صباحي" },
+  { label: "السلطة المشرفة", value: "وزارة التربية والتعليم" },
+  { label: "سنة التأسيس", value: "2017" },
+  { label: "المرحلة الدراسية", value: "المرحلة الثانوية" },
+];
+
 export const platforms: {
   name: string;
   short: string;
@@ -164,29 +184,31 @@ export const platforms: {
     short: "أجيال",
     description: "منصة وزارة التربية والتعليم الأردنية.",
     url: "https://ajyal.moe.gov.jo/emis/login.aspx",
-    logo: "https://www.google.com/s2/favicons?domain=ajyal.moe.gov.jo&sz=128",
+    logo: ajyalLogo.url,
   },
   {
     name: "سراج – المساعد الدراسي الذكي",
     short: "سراج",
     description: "المساعد الدراسي الذكي.",
     url: "https://siraj.moe.gov.jo/",
+    logo: sirajLogo.url,
   },
   {
     name: "وزارة التربية والتعليم الأردنية",
     short: "وزارة التربية والتعليم",
     description: "الموقع الرسمي للوزارة.",
     url: "https://moe.gov.jo/",
-    logo: "https://www.google.com/s2/favicons?domain=moe.gov.jo&sz=128",
+    logo: moeLogo.url,
   },
   {
     name: "فيسبوك المدرسة",
     short: "فيسبوك",
     description: "صفحة المدرسة الرسمية على فيسبوك.",
     url: school.facebook,
-    logo: "https://www.google.com/s2/favicons?domain=facebook.com&sz=128",
+    logo: schoolLogo.url,
   },
 ];
+
 
 export const routes = {
   home: "/",
