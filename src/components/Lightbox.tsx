@@ -38,7 +38,7 @@ export function useLightbox(items: LightboxItem[]) {
         role="dialog"
         aria-modal="true"
         aria-label="عارض الصور"
-        className="fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 backdrop-blur-sm"
+        className="lightbox-in fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 backdrop-blur-sm"
         onClick={close}
       >
         <button
