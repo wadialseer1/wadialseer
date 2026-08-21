@@ -318,11 +318,6 @@ export function InitiativesSection() {
       </div>
     </section>
   );
-
-        </div>
-      </div>
-    </section>
-  );
 }
 
 export function LocationSection() {
