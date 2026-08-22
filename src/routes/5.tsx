@@ -6,9 +6,9 @@ import { school } from "@/data/school";
 const title = "موقع المدرسة على الخريطة — أبو السوس الثانوية";
 const description =
   "موقع مدرسة أبو السوس الثانوية للبنين على الخريطة مع إمكانية فتح الموقع في Google Maps والحصول على الاتجاهات.";
-const url = "https://abusus.lovable.app/موقع-المدرسة";
+const url = "https://abusus.lovable.app/5";
 
-export const Route = createFileRoute("/موقع-المدرسة")({
+export const Route = createFileRoute("/5")({
   head: () => ({
     meta: [
       { title },

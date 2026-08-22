@@ -5,9 +5,9 @@ import { InitiativesSection } from "@/components/sections";
 const title = "المبادرات المدرسية — مدرسة أبو السوس الثانوية";
 const description =
   "مبادرات وأنشطة مدرسة أبو السوس الثانوية للبنين: لمدرستي أنتمي، التوجيه المهني، والانتخابات البرلمانية الطلابية.";
-const url = "https://abusus.lovable.app/المبادرات";
+const url = "https://abusus.lovable.app/4";
 
-export const Route = createFileRoute("/المبادرات")({
+export const Route = createFileRoute("/4")({
   head: () => ({
     meta: [
       { title },

@@ -1,8 +1,20 @@
 // جميع المحتويات مأخوذة من الموقع الأصلي للمدرسة: https://abusos.mystrikingly.com/
 // لا يتم إضافة أي معلومات غير موجودة في المصدر.
 
-import btecBusinessImage from "@/assets/btec-business.jpg";
-import btecItImage from "@/assets/btec-it.jpg";
+import btecIt from "@/assets/btec/it.jpg";
+import btecBusiness from "@/assets/btec/business.jpg";
+import btecEngineering from "@/assets/btec/engineering.jpg";
+import btecHospitality from "@/assets/btec/hospitality.jpg";
+import btecTravel from "@/assets/btec/travel.jpg";
+import btecAgriculture from "@/assets/btec/agriculture.jpg";
+import btecBeauty from "@/assets/btec/beauty.jpg";
+import btecArt from "@/assets/btec/art.jpg";
+import btecMedia from "@/assets/btec/media.jpg";
+import btecConstruction from "@/assets/btec/construction.jpg";
+import btecHealth from "@/assets/btec/health.jpg";
+import btecSport from "@/assets/btec/sport.jpg";
+import btecEarlyYears from "@/assets/btec/early-years.jpg";
+import btecEsports from "@/assets/btec/esports.jpg";
 import ajyalLogo from "@/assets/ajyal-logo.png.asset.json";
 import moeLogo from "@/assets/moe-logo.jpg.asset.json";
 import sirajLogo from "@/assets/siraj-logo.png.asset.json";
@@ -89,22 +101,106 @@ export const teachers: Person[] = [
 ];
 
 export const btecIntro =
-  "هو أحد أنظمة التعليم المهني المعترف بها دولياً، والذي يُركز على تقديم تعليم مهني متقدم في مختلف المجالات. بدأ هذا النظام في المملكة المتحدة وانتشر ليصبح أحد الخيارات التعليمية المميزة في العديد من الدول حول العالم، بما في ذلك الأردن.";
+  "BTEC – Business and Technology Education Council هو برنامج للتعليم المهني والتقني يركز على الجمع بين المعرفة النظرية والتطبيق العملي، ويهدف إلى تزويد الطلبة بالمهارات والخبرات المرتبطة بسوق العمل من خلال المشاريع والمهام والتطبيقات العملية. في الأردن بدأ تطبيق البرنامج عام 2023 بالتعاون مع وزارة التربية والتعليم وشركة Pearson، وتوسع تدريجيًا ليصل إلى 14 تخصصًا في العام الدراسي 2026/2027.";
 
 export const btecMajors = [
   {
     title: "تكنولوجيا المعلومات",
-    subtitle: "BTEC Information Technology",
-    image: btecItImage,
+    subtitle: "Information Technology",
+    image: btecIt,
     description:
-      "تخصص تكنولوجيا المعلومات في نظام BTEC البريطاني هو واحد من البرامج التعليمية التي تركز على تقديم مهارات ومفاهيم أساسية في مجال تكنولوجيا المعلومات. يتناول التخصص جوانب متعددة بالبرمجة والرسومات الرقمية والرسوم المتحركة وتصميم مواقع الويب والتطبيقات والألعاب وشبكات الحاسوب",
+      "يركز على البرمجة، وقواعد البيانات، والشبكات، وتطوير المواقع والتطبيقات، والأمن الرقمي، والتقنيات الحديثة.",
   },
   {
-    title: "إدارة الأعمال",
-    subtitle: "BTEC Business Administration",
-    image: btecBusinessImage,
+    title: "الأعمال",
+    subtitle: "Business",
+    image: btecBusiness,
     description:
-      "تخصص إدارة الأعمال في نظام BTEC البريطاني هو واحد من البرامج التعليمية التي تركز على تقديم مهارات ومفاهيم أساسية في مجال إدارة الأعمال. يتناول التخصص جوانب متعددة بالتسويق والخدمات اللوجستية وريادة الأعمال",
+      "يغطي الإدارة، والتسويق، والمحاسبة، وريادة الأعمال، والموارد البشرية، والتخطيط وإدارة المشاريع.",
+  },
+  {
+    title: "الهندسة",
+    subtitle: "Engineering",
+    image: btecEngineering,
+    description:
+      "يشمل التصميم الهندسي، والأنظمة الميكانيكية والكهربائية، والتصنيع، والصيانة، واستخدام الأدوات والتقنيات الهندسية.",
+  },
+  {
+    title: "الضيافة",
+    subtitle: "Hospitality",
+    image: btecHospitality,
+    description:
+      "يركز على فنون الطهي، وخدمات الطعام والشراب، وإدارة الفنادق، وخدمة العملاء والعمليات الفندقية.",
+  },
+  {
+    title: "السفر والسياحة",
+    subtitle: "Travel & Tourism",
+    image: btecTravel,
+    description:
+      "يغطي إدارة الحجوزات، وتنظيم الرحلات، والإرشاد السياحي، وخدمات السفر وإدارة المنشآت والوجهات السياحية.",
+  },
+  {
+    title: "الزراعة",
+    subtitle: "Agriculture",
+    image: btecAgriculture,
+    description:
+      "يركز على التقنيات الزراعية الحديثة، والإنتاج النباتي والحيواني، وإدارة الموارد الزراعية والاستدامة.",
+  },
+  {
+    title: "الشعر والتجميل",
+    subtitle: "Hair & Beauty",
+    image: btecBeauty,
+    description:
+      "يغطي العناية بالبشرة، وتصفيف الشعر، والتجميل، واستخدام الأدوات والمنتجات المهنية ومعايير السلامة والنظافة.",
+  },
+  {
+    title: "الفن والتصميم",
+    subtitle: "Art & Design",
+    image: btecArt,
+    description:
+      "يشمل التصميم الجرافيكي، والتصميم الداخلي، والفنون البصرية، والرسم، والتصوير، والتصميم الرقمي وتطوير المشاريع الإبداعية.",
+  },
+  {
+    title: "الوسائط الإبداعية",
+    subtitle: "Creative Media",
+    image: btecMedia,
+    description:
+      "يركز على صناعة المحتوى، والتصوير، والمونتاج، والإنتاج الرقمي، والرسوم المتحركة، والصوت والفيديو.",
+  },
+  {
+    title: "البناء والإنشاءات",
+    subtitle: "Construction",
+    image: btecConstruction,
+    description:
+      "يشمل التصميم والرسومات الهندسية، ومواد البناء، وتقنيات الإنشاء، وإدارة مواقع ومشاريع البناء والصحة والسلامة.",
+  },
+  {
+    title: "الرعاية الصحية والاجتماعية",
+    subtitle: "Health & Social Care",
+    image: btecHealth,
+    description:
+      "يغطي مبادئ الرعاية الصحية والاجتماعية، ودعم الأفراد، والصحة والسلامة، والتواصل، ورعاية الفئات المختلفة.",
+  },
+  {
+    title: "الرياضة",
+    subtitle: "Sport",
+    image: btecSport,
+    description:
+      "يركز على التدريب الرياضي، واللياقة البدنية، وتطوير الأداء، والتغذية، وتنظيم الفعاليات والإدارة الرياضية.",
+  },
+  {
+    title: "الطفولة المبكرة",
+    subtitle: "Early Years",
+    image: btecEarlyYears,
+    description:
+      "يركز على نمو الأطفال وتطورهم، ورعايتهم، والتعلم المبكر، والأنشطة التعليمية ودعم احتياجات الأطفال.",
+  },
+  {
+    title: "الرياضات الإلكترونية",
+    subtitle: "Esports",
+    image: btecEsports,
+    description:
+      "يركز على عالم الألعاب التنافسية، وتنظيم البطولات، وإدارة الفرق، والتسويق، والبث الإلكتروني، وصناعة المحتوى والفعاليات الرقمية.",
   },
 ];
 
@@ -159,8 +255,24 @@ export const initiatives = [
   },
 ];
 
-export const history =
-  "بحسب تقرير صحفي من عام 2016، المدرسة أُنشئت بمكرمة ملكية سامية، على قطعة أرض مملوكة لوزارة التربية، وكان الهدف إنشاء مدرسة ثانوية للذكور لخدمة أبناء منطقة أبو السوس والذراع. ويذكر التقرير أن الأرض تقع في قطعة رقم 143، حوض 9، المعلقة من أراضي غرب عمّان/قرية البصة – منطقة الذراع أبو السوس/لواء وادي السير، وأن مساحة الأرض كانت حوالي 5.5 دونم.";
+export const historyParagraphs = [
+  "أُنشئت مدرسة أبو السوس الثانوية الشاملة للبنين ضمن المبادرات الملكية لخدمة أبناء منطقتي أبو السوس والذراع، وتلبية حاجة المنطقة إلى مدرسة ثانوية للذكور، وتوفير بيئة تعليمية مناسبة لأبناء المنطقة. أُقيمت المدرسة على أرض تابعة لوزارة التربية والتعليم، بمساحة تقارب 5.5 دونم، واكتمل بناؤها قبل عام 2016.",
+  "وفي 24 نيسان 2018، افتُتحت المدرسة رسميًا ضمن المبادرات الملكية، وكانت عند افتتاحها تضم 21 غرفة صفية وأربعة مختبرات متخصصة في الفيزياء والكيمياء والأحياء والحاسوب، وبطاقة استيعابية تقارب 700 طالب. ومنذ افتتاحها أصبحت المدرسة من المؤسسات التعليمية التي تخدم أبناء المنطقة، وتوفر لهم التعليم الأكاديمي والمهني.",
+];
+
+export const historyDates = ["24 نيسان 2018", "2016"];
+
+export const historySourceNote =
+  "صحيفة الغد، صحيفة الأنباط، صراحة نيوز، وجراسا، والسوسنة، وتقارير صحفية موثقة عن إنشاء وافتتاح المدرسة.";
+
+export const historySources: { name: string; url: string }[] = [
+  {
+    name: "صحيفة الغد",
+    url: "https://alghad.com/Section-208/uncategorized/%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D9%85%D8%AF%D8%B1%D8%B3%D8%AA%D9%8A-%D8%A3%D8%A8%D9%88-%D8%A7%D9%84%D8%B3%D9%88%D8%B3-%D9%88-%D8%A7%D9%84%D9%83%D8%B1%D8%A7%D9%85%D8%A9-%D8%B6%D9%85%D9%86-%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%AF%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%84%D9%83%D9%8A%D8%A9-211440",
+  },
+  { name: "صحيفة الأنباط", url: "https://alanbatnews.net/article/191773" },
+  { name: "السوسنة", url: "https://www.assawsana.com/article/357657" },
+];
 
 export const schoolFacts: { label: string; value: string }[] = [
   { label: "الرقم الوطني", value: "114369" },
@@ -169,7 +281,7 @@ export const schoolFacts: { label: string; value: string }[] = [
   { label: "وقت المدرسة", value: "صباحي" },
   { label: "السلطة المشرفة", value: "وزارة التربية والتعليم" },
   { label: "سنة التأسيس", value: "2017" },
-  { label: "المرحلة الدراسية", value: "المرحلة الثانوية" },
+  { label: "المرحلة الدراسية", value: "من الصف الرابع إلى الصف الثاني عشر" },
 ];
 
 export const platforms: {

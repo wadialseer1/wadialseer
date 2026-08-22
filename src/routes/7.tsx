@@ -5,9 +5,9 @@ import { ContactSection } from "@/components/sections";
 const title = "تواصل معنا — مدرسة أبو السوس الثانوية للبنين";
 const description =
   "تواصل مع مدرسة أبو السوس الثانوية للبنين هاتفياً أو عبر البريد الإلكتروني أو صفحة المدرسة الرسمية على فيسبوك.";
-const url = "https://abusus.lovable.app/تواصل-معنا";
+const url = "https://abusus.lovable.app/7";
 
-export const Route = createFileRoute("/تواصل-معنا")({
+export const Route = createFileRoute("/7")({
   head: () => ({
     meta: [
       { title },
