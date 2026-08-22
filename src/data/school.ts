@@ -1,8 +1,20 @@
 // جميع المحتويات مأخوذة من الموقع الأصلي للمدرسة: https://abusos.mystrikingly.com/
 // لا يتم إضافة أي معلومات غير موجودة في المصدر.
 
-import btecBusinessImage from "@/assets/btec-business.jpg";
-import btecItImage from "@/assets/btec-it.jpg";
+import btecIt from "@/assets/btec/it.jpg";
+import btecBusiness from "@/assets/btec/business.jpg";
+import btecEngineering from "@/assets/btec/engineering.jpg";
+import btecHospitality from "@/assets/btec/hospitality.jpg";
+import btecTravel from "@/assets/btec/travel.jpg";
+import btecAgriculture from "@/assets/btec/agriculture.jpg";
+import btecBeauty from "@/assets/btec/beauty.jpg";
+import btecArt from "@/assets/btec/art.jpg";
+import btecMedia from "@/assets/btec/media.jpg";
+import btecConstruction from "@/assets/btec/construction.jpg";
+import btecHealth from "@/assets/btec/health.jpg";
+import btecSport from "@/assets/btec/sport.jpg";
+import btecEarlyYears from "@/assets/btec/early-years.jpg";
+import btecEsports from "@/assets/btec/esports.jpg";
 import ajyalLogo from "@/assets/ajyal-logo.png.asset.json";
 import moeLogo from "@/assets/moe-logo.jpg.asset.json";
 import sirajLogo from "@/assets/siraj-logo.png.asset.json";
