@@ -5,9 +5,9 @@ import { BtecSection } from "@/components/sections";
 const title = "نظام BTEC المهني — مدرسة أبو السوس الثانوية";
 const description =
   "نظام BTEC البريطاني في مدرسة أبو السوس الثانوية للبنين: تخصص تكنولوجيا المعلومات وتخصص إدارة الأعمال.";
-const url = "https://abusus.lovable.app/التعليم-المهني";
+const url = "https://abusus.lovable.app/3";
 
-export const Route = createFileRoute("/التعليم-المهني")({
+export const Route = createFileRoute("/3")({
   head: () => ({
     meta: [
       { title },

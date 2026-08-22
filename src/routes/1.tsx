@@ -6,9 +6,9 @@ const title = "عن المدرسة — مدرسة أبو السوس الثانو
 const description =
   "نبذة عن مدرسة أبو السوس الثانوية للبنين: تأسست عام 2017 بمكرمة ملكية سامية في لواء وادي السير، مع بيانات المدرسة الرسمية.";
 
-const url = "https://abusus.lovable.app/عن-المدرسة";
+const url = "https://abusus.lovable.app/1";
 
-export const Route = createFileRoute("/عن-المدرسة")({
+export const Route = createFileRoute("/1")({
   head: () => ({
     meta: [
       { title },

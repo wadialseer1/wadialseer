@@ -5,9 +5,9 @@ import { StaffSection } from "@/components/sections";
 const title = "الهيئة الإدارية والتدريسية — مدرسة أبو السوس الثانوية";
 const description =
   "تعرّف على الهيئة الإدارية والهيئة التدريسية في مدرسة أبو السوس الثانوية للبنين وتخصصات كل معلم.";
-const url = "https://abusus.lovable.app/هيئة-المدرسة";
+const url = "https://abusus.lovable.app/2";
 
-export const Route = createFileRoute("/هيئة-المدرسة")({
+export const Route = createFileRoute("/2")({
   head: () => ({
     meta: [
       { title },

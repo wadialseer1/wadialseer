@@ -5,9 +5,9 @@ import { PlatformsSection } from "@/components/sections";
 const title = "المنصات التعليمية — مدرسة أبو السوس الثانوية";
 const description =
   "روابط المنصات التعليمية: منصة أجيال، سراج المساعد الدراسي الذكي، وزارة التربية والتعليم، وصفحة المدرسة على فيسبوك.";
-const url = "https://abusus.lovable.app/المنصات-التعليمية";
+const url = "https://abusus.lovable.app/6";
 
-export const Route = createFileRoute("/المنصات-التعليمية")({
+export const Route = createFileRoute("/6")({
   head: () => ({
     meta: [
       { title },
