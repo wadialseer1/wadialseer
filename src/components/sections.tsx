@@ -119,9 +119,15 @@ export function AboutSection() {
           <Reveal className="lg:col-span-3">
             <article className="card-premium h-full p-8 sm:p-10">
               <h3 className="text-2xl font-extrabold sm:text-3xl">تأسيس المدرسة</h3>
-              <p className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg">
-                {history}
-              </p>
+              {historyParagraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg"
+                >
+                  <HighlightDates text={paragraph} />
+                </p>
+              ))}
+              <HistorySources />
             </article>
           </Reveal>
           <Reveal delay={140} className="lg:col-span-2">
