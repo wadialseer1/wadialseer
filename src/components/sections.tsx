@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
 import { useLightbox } from "@/components/Lightbox";
