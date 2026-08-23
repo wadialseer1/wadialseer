@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
 import { useLightbox } from "@/components/Lightbox";
@@ -9,7 +10,10 @@ import {
   btecIntro,
   btecMajors,
   directionsUrl,
-  history,
+  historyDates,
+  historyParagraphs,
+  historySourceNote,
+  historySources,
   initiatives,
   mapEmbedUrl,
   mapsUrl,
@@ -107,6 +111,59 @@ export function Hero() {
   );
 }
 
+function HighlightDates({ text }: { text: string }) {
+  const parts = text.split(new RegExp(`(${historyDates.join("|")})`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        historyDates.includes(part) ? (
+          <strong key={i} className="font-bold text-info">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+function HistorySources() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mt-7 border-t border-border pt-5">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="text-sm font-bold text-primary transition-opacity hover:opacity-80"
+      >
+        المصدر
+      </button>
+      {open && (
+        <div className="mt-3 space-y-3 text-sm leading-loose text-muted-foreground">
+          <p>{historySourceNote}</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {historySources.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-info underline underline-offset-4"
+                >
+                  {source.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function AboutSection() {
   return (
     <section className="section-pad" id="about">
@@ -116,9 +173,15 @@ export function AboutSection() {
           <Reveal className="lg:col-span-3">
             <article className="card-premium h-full p-8 sm:p-10">
               <h3 className="text-2xl font-extrabold sm:text-3xl">تأسيس المدرسة</h3>
-              <p className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg">
-                {history}
-              </p>
+              {historyParagraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg"
+                >
+                  <HighlightDates text={paragraph} />
+                </p>
+              ))}
+              <HistorySources />
             </article>
           </Reveal>
           <Reveal delay={140} className="lg:col-span-2">

@@ -324,11 +324,11 @@ export const platforms: {
 
 export const routes = {
   home: "/",
-  about: "/عن-المدرسة",
-  staff: "/هيئة-المدرسة",
-  btec: "/التعليم-المهني",
-  initiatives: "/المبادرات",
-  location: "/موقع-المدرسة",
-  platforms: "/المنصات-التعليمية",
-  contact: "/تواصل-معنا",
+  about: "/1",
+  staff: "/2",
+  btec: "/3",
+  initiatives: "/4",
+  location: "/5",
+  platforms: "/6",
+  contact: "/7",
 } as const;
