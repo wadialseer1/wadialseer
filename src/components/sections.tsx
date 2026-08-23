@@ -110,6 +110,59 @@ export function Hero() {
   );
 }
 
+function HighlightDates({ text }: { text: string }) {
+  const parts = text.split(new RegExp(`(${historyDates.join("|")})`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        historyDates.includes(part) ? (
+          <strong key={i} className="font-bold text-info">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+function HistorySources() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mt-7 border-t border-border pt-5">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="text-sm font-bold text-primary transition-opacity hover:opacity-80"
+      >
+        المصدر
+      </button>
+      {open && (
+        <div className="mt-3 space-y-3 text-sm leading-loose text-muted-foreground">
+          <p>{historySourceNote}</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {historySources.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-info underline underline-offset-4"
+                >
+                  {source.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function AboutSection() {
   return (
     <section className="section-pad" id="about">
