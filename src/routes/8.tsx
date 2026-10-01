@@ -5,7 +5,7 @@ import { TextbooksSection } from "@/components/sections";
 const title = "الكتب المدرسية — مدرسة وادي السير الأساسية للبنين";
 const description =
   "روابط الكتب المدرسية الرسمية من الصف الرابع حتى العاشر لطلاب مدرسة وادي السير الأساسية للبنين.";
-const url = "https://abusus.lovable.app/7";
+const url = "https://abusus.lovable.app/8";
 
 export const Route = createFileRoute("/8")({
   head: () => ({
