@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { AboutSection } from "@/components/sections";
 
-const title = "عن المدرسة — مدرسة أبو السوس الثانوية للبنين";
+const title = "عن المدرسة — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "نبذة عن مدرسة أبو السوس الثانوية للبنين: تأسست عام 2017 بمكرمة ملكية سامية في لواء وادي السير، مع بيانات المدرسة الرسمية.";
+  "نبذة عن مدرسة وادي السير الأساسية للبنين: تأسست عام 2017 بمكرمة ملكية سامية في لواء وادي السير، مع بيانات المدرسة الرسمية.";
 
 const url = "https://abusus.lovable.app/1";
 
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/1")({
 function AboutPage() {
   return (
     <>
-      <h1 className="sr-only">عن مدرسة أبو السوس الثانوية للبنين</h1>
+      <h1 className="sr-only">عن مدرسة وادي السير الأساسية للبنين</h1>
       <AboutSection />
     </>
   );

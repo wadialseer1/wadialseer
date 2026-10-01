@@ -22,7 +22,7 @@ export function SiteFooter() {
           <div className="flex items-center gap-3">
             <img
               src={logo.url}
-              alt="شعار مدرسة أبو السوس الثانوية للبنين"
+              alt="شعار مدرسة وادي السير الأساسية للبنين"
               className="h-12 w-12 rounded-xl bg-foreground/95 object-contain p-1"
               width={48}
               height={48}

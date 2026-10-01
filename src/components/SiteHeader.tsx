@@ -25,7 +25,7 @@ export function SiteHeader() {
         <Link to={routes.home} className="flex min-w-0 items-center gap-3">
           <img
             src={logo.url}
-            alt="شعار مدرسة أبو السوس الثانوية للبنين"
+            alt="شعار مدرسة وادي السير الأساسية للبنين"
             className="h-11 w-11 shrink-0 rounded-xl bg-foreground/95 object-contain p-1"
             width={44}
             height={44}

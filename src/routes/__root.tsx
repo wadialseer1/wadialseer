@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "مدرسة أبو السوس الثانوية للبنين" },
+      { title: "مدرسة وادي السير الأساسية للبنين" },
       {
         name: "description",
-        content: "الموقع الرسمي لمدرسة أبو السوس الثانوية للبنين.",
+        content: "الموقع الرسمي لمدرسة وادي السير الأساسية للبنين.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "مدرسة أبو السوس الثانوية للبنين" },
+      { property: "og:site_name", content: "مدرسة وادي السير الأساسية للبنين" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

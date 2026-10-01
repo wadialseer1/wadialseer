@@ -59,7 +59,7 @@ export function Hero() {
     <section className="relative isolate overflow-hidden surface-hero">
       <img
         src={school.heroImage}
-        alt="مبنى وساحات مدرسة أبو السوس الثانوية للبنين"
+        alt="مبنى وساحات مدرسة وادي السير الأساسية للبنين"
         className="absolute inset-0 h-full w-full object-cover opacity-25"
         loading="eager"
       />
@@ -70,7 +70,7 @@ export function Hero() {
           <Reveal>
             <img
               src={logo.url}
-              alt="شعار مدرسة أبو السوس الثانوية للبنين"
+              alt="شعار مدرسة وادي السير الأساسية للبنين"
               className="mx-auto h-28 w-28 rounded-3xl bg-foreground/95 object-contain p-2 shadow-premium sm:h-36 sm:w-36"
               width={144}
               height={144}
@@ -78,7 +78,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={120}>
             <h1 className="mt-8 text-4xl font-black leading-tight sm:text-6xl lg:text-7xl">
-              <span className="text-gold-gradient">مدرسة أبو السوس</span>
+              <span className="text-gold-gradient">مدرسة وادي السير</span>
               <br />
               الثانوية للبنين
             </h1>
@@ -387,7 +387,7 @@ export function LocationSection() {
   return (
     <section className="section-pad border-y border-border bg-card/40" id="location">
       <div className="container-site">
-        <SectionTitle eyebrow="الوصول إلينا" title="موقع مدرسة أبو السوس الثانوية للبنين" />
+        <SectionTitle eyebrow="الوصول إلينا" title="موقع مدرسة وادي السير الأساسية للبنين" />
 
         <Reveal className="mt-12">
           <div className="overflow-hidden rounded-3xl border border-border shadow-premium">
@@ -425,7 +425,7 @@ export function LocationSection() {
             </div>
 
             <iframe
-              title="خريطة موقع مدرسة أبو السوس الثانوية للبنين"
+              title="خريطة موقع مدرسة وادي السير الأساسية للبنين"
               src={mapEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
