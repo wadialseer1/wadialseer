@@ -13,6 +13,7 @@ const nav = [
   { label: "المبادرات المدرسية", to: routes.initiatives },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
+  { label: "الكتب المدرسية", to: routes.textbooks },
   { label: "تواصل معنا", to: routes.contact },
 ];
 

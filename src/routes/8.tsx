@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { TextbooksSection } from "@/components/sections";
 
-const title = "تواصل معنا — مدرسة وادي السير الأساسية للبنين";
+const title = "الكتب المدرسية — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "تواصل مع مدرسة وادي السير الأساسية للبنين هاتفياً أو عبر البريد الإلكتروني أو صفحة المدرسة الرسمية على فيسبوك.";
+  "روابط الكتب المدرسية الرسمية من الصف الرابع حتى العاشر لطلاب مدرسة وادي السير الأساسية للبنين.";
 const url = "https://abusus.lovable.app/7";
 
 export const Route = createFileRoute("/8")({
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/8")({
 function TextbooksPage() {
   return (
     <>
-      <h1 className="sr-only">تواصل معنا</h1>
+      <h1 className="sr-only">الكتب المدرسية</h1>
       <TextbooksSection />
     </>
   );

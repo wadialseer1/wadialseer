@@ -11,6 +11,7 @@ const links = [
   { label: "المبادرات المدرسية", to: routes.initiatives },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
+  { label: "الكتب المدرسية", to: routes.textbooks },
   { label: "تواصل معنا", to: routes.contact },
 ];
 
@@ -53,7 +54,7 @@ export function SiteFooter() {
             className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary"
           >
             <Phone className="h-4 w-4 shrink-0 text-primary" />
-            <span dir="ltr">{school.phone}</span>
+            <span dir="ltr">{school.phoneDisplay}</span>
           </a>
           <a
             href={`mailto:${school.email}`}

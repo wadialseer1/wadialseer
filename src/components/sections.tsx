@@ -438,7 +438,7 @@ export function ContactSection() {
               <span className="min-w-0">
                 <span className="block text-sm text-muted-foreground">اتصل بنا</span>
                 <span dir="ltr" className="block truncate text-lg font-bold">
-                  {school.phone}
+                  {school.phoneDisplay}
                 </span>
               </span>
             </a>

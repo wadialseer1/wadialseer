@@ -17,6 +17,7 @@ import { Route as R4RouteImport } from './routes/4'
 import { Route as R5RouteImport } from './routes/5'
 import { Route as R6RouteImport } from './routes/6'
 import { Route as R7RouteImport } from './routes/7'
+import { Route as R8RouteImport } from './routes/8'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,11 @@ const R7Route = R7RouteImport.update({
   path: '/7',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R8Route = R8RouteImport.update({
+  id: '/8',
+  path: '/8',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/5': typeof R5Route
   '/6': typeof R6Route
   '/7': typeof R7Route
+  '/8': typeof R8Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/5': typeof R5Route
   '/6': typeof R6Route
   '/7': typeof R7Route
+  '/8': typeof R8Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,13 +97,14 @@ export interface FileRoutesById {
   '/5': typeof R5Route
   '/6': typeof R6Route
   '/7': typeof R7Route
+  '/8': typeof R8Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7'
+  fullPaths: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7'
-  id: '__root__' | '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7'
+  to: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
+  id: '__root__' | '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -107,6 +116,7 @@ export interface RootRouteChildren {
   R5Route: typeof R5Route
   R6Route: typeof R6Route
   R7Route: typeof R7Route
+  R8Route: typeof R8Route
 }
 
 declare module '@tanstack/react-router' {
@@ -167,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R7RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/8': {
+      id: '/8'
+      path: '/8'
+      fullPath: '/8'
+      preLoaderRoute: typeof R8RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -179,6 +196,7 @@ const rootRouteChildren: RootRouteChildren = {
   R5Route: R5Route,
   R6Route: R6Route,
   R7Route: R7Route,
+  R8Route: R8Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
