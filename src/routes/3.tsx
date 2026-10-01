@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { BtecSection } from "@/components/sections";
 
-const title = "نظام BTEC المهني — مدرسة أبو السوس الثانوية";
+const title = "نظام BTEC المهني — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "نظام BTEC البريطاني في مدرسة أبو السوس الثانوية للبنين: تخصص تكنولوجيا المعلومات وتخصص إدارة الأعمال.";
+  "نظام BTEC البريطاني في مدرسة وادي السير الأساسية للبنين: تخصص تكنولوجيا المعلومات وتخصص إدارة الأعمال.";
 const url = "https://abusus.lovable.app/3";
 
 export const Route = createFileRoute("/3")({

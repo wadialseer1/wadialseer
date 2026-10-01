@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LocationSection } from "@/components/sections";
 import { school } from "@/data/school";
 
-const title = "موقع المدرسة على الخريطة — أبو السوس الثانوية";
+const title = "موقع المدرسة على الخريطة — وادي السير الأساسية";
 const description =
-  "موقع مدرسة أبو السوس الثانوية للبنين على الخريطة مع إمكانية فتح الموقع في Google Maps والحصول على الاتجاهات.";
+  "موقع مدرسة وادي السير الأساسية للبنين على الخريطة مع إمكانية فتح الموقع في Google Maps والحصول على الاتجاهات.";
 const url = "https://abusus.lovable.app/5";
 
 export const Route = createFileRoute("/5")({
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/5")({
 function LocationPage() {
   return (
     <>
-      <h1 className="sr-only">موقع مدرسة أبو السوس الثانوية للبنين</h1>
+      <h1 className="sr-only">موقع مدرسة وادي السير الأساسية للبنين</h1>
       <LocationSection />
     </>
   );

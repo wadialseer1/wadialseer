@@ -10,10 +10,6 @@ import {
   btecIntro,
   btecMajors,
   directionsUrl,
-  historyDates,
-  historyParagraphs,
-  historySourceNote,
-  historySources,
   initiatives,
   mapEmbedUrl,
   mapsUrl,
@@ -21,7 +17,8 @@ import {
   routes,
   school,
   schoolFacts,
-  teachers,
+  teacherGroups,
+  textbookGrades,
   type Person,
 } from "@/data/school";
 
@@ -59,7 +56,7 @@ export function Hero() {
     <section className="relative isolate overflow-hidden surface-hero">
       <img
         src={school.heroImage}
-        alt="مبنى وساحات مدرسة أبو السوس الثانوية للبنين"
+        alt="مبنى وساحات مدرسة وادي السير الأساسية للبنين"
         className="absolute inset-0 h-full w-full object-cover opacity-25"
         loading="eager"
       />
@@ -70,7 +67,7 @@ export function Hero() {
           <Reveal>
             <img
               src={logo.url}
-              alt="شعار مدرسة أبو السوس الثانوية للبنين"
+              alt="شعار مدرسة وادي السير الأساسية للبنين"
               className="mx-auto h-28 w-28 rounded-3xl bg-foreground/95 object-contain p-2 shadow-premium sm:h-36 sm:w-36"
               width={144}
               height={144}
@@ -78,9 +75,9 @@ export function Hero() {
           </Reveal>
           <Reveal delay={120}>
             <h1 className="mt-8 text-4xl font-black leading-tight sm:text-6xl lg:text-7xl">
-              <span className="text-gold-gradient">مدرسة أبو السوس</span>
+              <span className="text-gold-gradient">مدرسة وادي السير</span>
               <br />
-              الثانوية للبنين
+              الأساسية للبنين
             </h1>
           </Reveal>
           <Reveal delay={220}>
@@ -111,80 +108,13 @@ export function Hero() {
   );
 }
 
-function HighlightDates({ text }: { text: string }) {
-  const parts = text.split(new RegExp(`(${historyDates.join("|")})`, "g"));
-  return (
-    <>
-      {parts.map((part, i) =>
-        historyDates.includes(part) ? (
-          <strong key={i} className="font-bold text-info">
-            {part}
-          </strong>
-        ) : (
-          <span key={i}>{part}</span>
-        ),
-      )}
-    </>
-  );
-}
-
-function HistorySources() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="mt-7 border-t border-border pt-5">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="text-sm font-bold text-primary transition-opacity hover:opacity-80"
-      >
-        المصدر
-      </button>
-      {open && (
-        <div className="mt-3 space-y-3 text-sm leading-loose text-muted-foreground">
-          <p>{historySourceNote}</p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {historySources.map((source) => (
-              <li key={source.url}>
-                <a
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-info underline underline-offset-4"
-                >
-                  {source.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function AboutSection() {
   return (
     <section className="section-pad" id="about">
       <div className="container-site">
         <SectionTitle eyebrow="عن المدرسة" title="نبذة عن المدرسة" />
         <div className="mt-12 grid gap-6 lg:grid-cols-5">
-          <Reveal className="lg:col-span-3">
-            <article className="card-premium h-full p-8 sm:p-10">
-              <h3 className="text-2xl font-extrabold sm:text-3xl">تأسيس المدرسة</h3>
-              {historyParagraphs.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className="mt-5 text-base leading-loose text-muted-foreground sm:text-lg"
-                >
-                  <HighlightDates text={paragraph} />
-                </p>
-              ))}
-              <HistorySources />
-            </article>
-          </Reveal>
-          <Reveal delay={140} className="lg:col-span-2">
+          <Reveal delay={140} className="lg:col-span-5">
             <article className="card-premium h-full p-8 sm:p-10">
               <h3 className="text-2xl font-extrabold sm:text-3xl">بيانات المدرسة</h3>
               <dl className="mt-5 divide-y divide-border">
@@ -207,48 +137,18 @@ export function AboutSection() {
 }
 
 
-function PersonCard({ person, onOpen }: { person: Person; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="card-premium w-64 shrink-0 overflow-hidden text-right sm:w-auto"
-    >
-      <img
-        src={person.image}
-        alt={`${person.name} - ${person.role}`}
-        className="aspect-square w-full bg-secondary object-cover"
-        loading="lazy"
-      />
-      <div className="p-5 text-center">
-        <h3 className="text-lg font-bold">{person.name}</h3>
-        <p className="mt-1 text-sm text-primary">{person.role}</p>
-      </div>
-    </button>
-  );
-}
-
 function PeopleRow({ people }: { people: Person[] }) {
-  const { open, view } = useLightbox(
-    people.map((person) => ({ src: person.image, caption: `${person.name} — ${person.role}` })),
-  );
-
   return (
-    <>
-      <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-4 sm:hidden">
-        {people.map((person, i) => (
-          <PersonCard key={person.name} person={person} onOpen={() => open(i)} />
-        ))}
-      </div>
-      <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {people.map((person, i) => (
-          <Reveal key={person.name} delay={(i % 4) * 60}>
-            <PersonCard person={person} onOpen={() => open(i)} />
-          </Reveal>
-        ))}
-      </div>
-      {view}
-    </>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {people.map((person, i) => (
+        <Reveal key={person.name} delay={(i % 4) * 60}>
+          <div className="card-premium p-6 text-center">
+            <h3 className="text-lg font-bold">{person.name}</h3>
+            <p className="mt-1 text-sm text-primary">{person.role}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
   );
 }
 
@@ -262,7 +162,54 @@ export function StaffSection() {
         <PeopleRow people={administration} />
 
         <h3 className="mt-16 mb-6 text-2xl font-extrabold sm:text-3xl">الهيئة التدريسية</h3>
-        <PeopleRow people={teachers} />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {teacherGroups.map((group, i) => (
+            <Reveal key={group.subject} delay={(i % 3) * 60}>
+              <article className="card-premium h-full p-6">
+                <h4 className="border-b border-border pb-3 text-xl font-extrabold text-primary">
+                  {group.subject}
+                </h4>
+                <ul className="mt-4 space-y-2 text-base text-muted-foreground">
+                  {group.names.map((name) => (
+                    <li key={name} className="font-semibold text-info">{name}</li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function TextbooksSection() {
+  return (
+    <section className="section-pad">
+      <div className="container-site">
+        <SectionTitle
+          eyebrow="الكتب المدرسية"
+          title="الكتب المدرسية من الصف الرابع حتى العاشر"
+          description="روابط الكتب المقررة الرسمية لكل صف عبر منصة منهاجي."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {textbookGrades.map((g, i) => (
+            <Reveal key={g.grade} delay={(i % 4) * 60}>
+              <article className="card-premium flex h-full flex-col items-center gap-4 p-7 text-center">
+                <h3 className="text-xl font-extrabold">{g.grade}</h3>
+                <a
+                  href={g.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
+                >
+                  فتح الكتب
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -326,16 +273,7 @@ function InitiativeGallery({ title, images }: { title: string; images: string[] 
   );
 }
 
-const highlightedNames = [
-  "محمود السكارنة",
-  "محمود السكارنه",
-  "محمد صندوقة",
-  "نسرين الشيخ",
-  "محمد الصالحي",
-  "اسامه العقيل",
-  "ليث المناصير",
-  "روحيه سعد الدين",
-];
+const highlightedNames = ["زيد الحسامي", "هيثم القرعان"];
 
 function HighlightNames({ text }: { text: string }) {
   const parts = text.split(new RegExp(`(${highlightedNames.join("|")})`, "g"));
@@ -387,7 +325,7 @@ export function LocationSection() {
   return (
     <section className="section-pad border-y border-border bg-card/40" id="location">
       <div className="container-site">
-        <SectionTitle eyebrow="الوصول إلينا" title="موقع مدرسة أبو السوس الثانوية للبنين" />
+        <SectionTitle eyebrow="الوصول إلينا" title="موقع مدرسة وادي السير الأساسية للبنين" />
 
         <Reveal className="mt-12">
           <div className="overflow-hidden rounded-3xl border border-border shadow-premium">
@@ -425,7 +363,7 @@ export function LocationSection() {
             </div>
 
             <iframe
-              title="خريطة موقع مدرسة أبو السوس الثانوية للبنين"
+              title="خريطة موقع مدرسة وادي السير الأساسية للبنين"
               src={mapEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -500,7 +438,7 @@ export function ContactSection() {
               <span className="min-w-0">
                 <span className="block text-sm text-muted-foreground">اتصل بنا</span>
                 <span dir="ltr" className="block truncate text-lg font-bold">
-                  {school.phone}
+                  {school.phoneDisplay}
                 </span>
               </span>
             </a>

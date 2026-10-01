@@ -13,6 +13,7 @@ const nav = [
   { label: "المبادرات المدرسية", to: routes.initiatives },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
+  { label: "الكتب المدرسية", to: routes.textbooks },
   { label: "تواصل معنا", to: routes.contact },
 ];
 
@@ -25,7 +26,7 @@ export function SiteHeader() {
         <Link to={routes.home} className="flex min-w-0 items-center gap-3">
           <img
             src={logo.url}
-            alt="شعار مدرسة أبو السوس الثانوية للبنين"
+            alt="شعار مدرسة وادي السير الأساسية للبنين"
             className="h-11 w-11 shrink-0 rounded-xl bg-foreground/95 object-contain p-1"
             width={44}
             height={44}

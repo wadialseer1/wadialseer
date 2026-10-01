@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { StaffSection } from "@/components/sections";
 
-const title = "الهيئة الإدارية والتدريسية — مدرسة أبو السوس الثانوية";
+const title = "الهيئة الإدارية والتدريسية — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "تعرّف على الهيئة الإدارية والهيئة التدريسية في مدرسة أبو السوس الثانوية للبنين وتخصصات كل معلم.";
+  "تعرّف على الهيئة الإدارية والهيئة التدريسية في مدرسة وادي السير الأساسية للبنين وتخصصات كل معلم.";
 const url = "https://abusus.lovable.app/2";
 
 export const Route = createFileRoute("/2")({
