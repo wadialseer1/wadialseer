@@ -21,6 +21,8 @@ import sirajLogo from "@/assets/siraj-logo.png.asset.json";
 import schoolLogo from "@/assets/logo.png.asset.json";
 import init1 from "@/assets/init-1.png.asset.json";
 import init2 from "@/assets/init-2.png.asset.json";
+import assembly1 from "@/assets/assembly-1.png";
+import assembly2 from "@/assets/assembly-2.png";
 
 const CDN = "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload";
 const wide = (id: string) => `${CDN}/c_limit,fl_lossy,h_1400,w_1600,f_auto,q_auto/${id}`;
@@ -67,7 +69,7 @@ export const mapEmbedUrl = `https://maps.google.com/maps?q=${school.coords.lat},
 export type Person = { name: string; role: string };
 
 export const administration: Person[] = [
-  { name: "الدكتور زيد السكارنة", role: "مدير المدرسة" },
+  { name: "الأستاذ زيد الحسامي", role: "مدير المدرسة" },
   { name: "الأستاذ حمدي العويدي", role: "مساعد المدير" },
   { name: "الأستاذ حامد", role: "المرشد التربوي" },
   { name: "الأستاذ محمد العقيلي", role: "السكرتير" },
@@ -231,7 +233,7 @@ export const schoolFacts: { label: string; value: string }[] = [
   { label: "الفترات الدراسية", value: "صباحية ومسائية" },
   { label: "ساعات الدوام", value: "من 8:00 صباحًا إلى 4:00 مساءً" },
   { label: "الصفوف", value: "من الصف الرابع حتى العاشر" },
-  { label: "مدير المدرسة", value: "الدكتور زيد السكارنة" },
+  { label: "مدير المدرسة", value: "الأستاذ زيد الحسامي" },
   { label: "الجهة المشرفة", value: "وزارة التربية والتعليم الأردنية" },
   { label: "العنوان", value: "شارع عربي جرادات، حي غياضة، وادي السير، عمّان" },
 ];
@@ -295,3 +297,25 @@ export const routes = {
   contact: "/7",
   textbooks: "/8",
 } as const;
+
+export const morningAssembly = {
+  title: "الطابور الصباحي… حين تتحول الدقائق الأولى إلى قيمة تربوية",
+  intro: [
+    "في مدرسة وادي السير الأساسية للبنين، لا يبدأ اليوم الدراسي عند قرع الجرس… بل يبدأ من الساحة، حيث يقف الطلبة صفًا واحدًا.",
+    "فالطابور الصباحي مساحةٌ تربوية تتكامل فيها قيم الانضباط، والانتماء، والمسؤولية، واحترام الوقت، وروح الجماعة.",
+  ],
+  points: [
+    "كلمةٌ صباحية تفتح نافذةً للفكر.",
+    "تحيةُ العلم تجدد معنى الانتماء.",
+    "الإذاعة المدرسية تمنح الطالب فرصةً للتعبير والمشاركة.",
+    "الالتزام بالنظام يترجم التربية إلى سلوكٍ عملي.",
+  ],
+  outro: [
+    "إنها دقائق قصيرة… لكنها تحمل رسائل كبيرة.",
+    "رسالةُ الطابور الصباحي ليست أن نقف فقط، بل أن نتعلم كيف نلتزم، وكيف نشارك، وكيف نقف معًا.",
+    "نبدأ صباحنا بالانضباط… لنصنع يومًا مليئًا بالتعلم والإنجاز.",
+  ],
+  signature: "مدرسة وادي السير الأساسية للبنين — الفترة الصباحية والمسائية",
+  motto: "نُربي اليوم… لنصنع أثر الغد",
+  images: [assembly1, assembly2],
+};

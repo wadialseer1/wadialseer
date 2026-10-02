@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { InitiativesSection } from "@/components/sections";
+import { AssemblySection, InitiativesSection } from "@/components/sections";
 
 const title = "المبادرات المدرسية — مدرسة وادي السير الأساسية للبنين";
 const description =
@@ -28,6 +28,7 @@ function InitiativesPage() {
     <>
       <h1 className="sr-only">المبادرات المدرسية</h1>
       <InitiativesSection />
+      <AssemblySection />
     </>
   );
 }
