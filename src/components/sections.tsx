@@ -19,6 +19,7 @@ import {
   schoolFacts,
   teacherGroups,
   textbookGrades,
+  morningAssembly,
   type Person,
 } from "@/data/school";
 
@@ -248,11 +249,11 @@ export function BtecSection() {
   );
 }
 
-function InitiativeGallery({ title, images }: { title: string; images: string[] }) {
+function InitiativeGallery({ title, images, columns = 4 }: { title: string; images: string[]; columns?: 2 | 4 }) {
   const { open, view } = useLightbox(images.map((src) => ({ src, caption: title })));
 
   return (
-    <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <div className={`mt-6 grid grid-cols-2 gap-3 ${columns === 4 ? "sm:grid-cols-4" : ""}`}>
       {images.map((src, index) => (
         <button
           key={src}
@@ -315,6 +316,33 @@ export function InitiativesSection() {
               </article>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function AssemblySection() {
+  const a = morningAssembly;
+  return (
+    <section className="section-pad border-y border-border bg-card/40">
+      <div className="container-site">
+        <SectionTitle eyebrow="الطابور الصباحي" title={a.title} />
+        <div className="mt-12 grid gap-10 lg:grid-cols-2">
+          <Reveal>
+            <div className="space-y-4 text-base leading-loose text-muted-foreground">
+              {a.intro.map((t) => <p key={t}>{t}</p>)}
+              <ul className="space-y-2 border-r-2 border-primary pr-4 text-foreground">
+                {a.points.map((t) => <li key={t}>{t}</li>)}
+              </ul>
+              {a.outro.map((t) => <p key={t}>{t}</p>)}
+              <p className="pt-2 text-sm font-semibold text-muted-foreground">{a.signature}</p>
+              <p className="text-xl font-extrabold text-primary">{a.motto}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <InitiativeGallery title="الطابور الصباحي" images={a.images} columns={2} />
+          </Reveal>
         </div>
       </div>
     </section>
