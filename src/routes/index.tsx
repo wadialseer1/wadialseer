@@ -9,6 +9,7 @@ import {
   InitiativesSection,
   LocationSection,
   PlatformsSection,
+  StaffSection,
 } from "@/components/sections";
 import { school } from "@/data/school";
 
@@ -60,9 +61,10 @@ function Index() {
     <>
       <Hero />
       <AboutSection />
-      <BtecSection />
+      <StaffSection />
       <InitiativesSection />
       <AssemblySection />
+      <BtecSection />
       <LocationSection />
       <PlatformsSection />
       <ContactSection />

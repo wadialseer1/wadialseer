@@ -18,7 +18,6 @@ import {
   school,
   schoolFacts,
   teacherGroups,
-  textbookGrades,
   morningAssembly,
   type Person,
 } from "@/data/school";
@@ -184,37 +183,7 @@ export function StaffSection() {
   );
 }
 
-export function TextbooksSection() {
-  return (
-    <section className="section-pad">
-      <div className="container-site">
-        <SectionTitle
-          eyebrow="الكتب المدرسية"
-          title="الكتب المدرسية من الصف الرابع حتى العاشر"
-          description="روابط الكتب المقررة الرسمية لكل صف عبر منصة منهاجي."
-        />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {textbookGrades.map((g, i) => (
-            <Reveal key={g.grade} delay={(i % 4) * 60}>
-              <article className="card-premium flex h-full flex-col items-center gap-4 p-7 text-center">
-                <h3 className="text-xl font-extrabold">{g.grade}</h3>
-                <a
-                  href={g.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
-                >
-                  فتح الكتب
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+export { TextbooksSection } from "@/components/Textbooks";
 
 export function BtecSection() {
   return (

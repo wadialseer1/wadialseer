@@ -7,8 +7,8 @@ import { mapsUrl, routes, school } from "@/data/school";
 const links = [
   { label: "عن المدرسة", to: routes.about },
   { label: "الهيئة الإدارية والتدريسية", to: routes.staff },
-  { label: "نظام BTEC", to: routes.btec },
   { label: "المبادرات المدرسية", to: routes.initiatives },
+  { label: "نظام BTEC", to: routes.btec },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
   { label: "الكتب المدرسية", to: routes.textbooks },
