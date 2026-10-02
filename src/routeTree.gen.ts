@@ -18,6 +18,7 @@ import { Route as R5RouteImport } from './routes/5'
 import { Route as R6RouteImport } from './routes/6'
 import { Route as R7RouteImport } from './routes/7'
 import { Route as R8RouteImport } from './routes/8'
+import { Route as ApiPublicBookIdRouteImport } from './routes/api/public/book/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const R8Route = R8RouteImport.update({
   path: '/8',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBookIdRoute = ApiPublicBookIdRouteImport.update({
+  id: '/api/public/book/$id',
+  path: '/api/public/book/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
+  '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
+  '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,13 +106,45 @@ export interface FileRoutesById {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
+  '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
+  fullPaths:
+    | '/'
+    | '/1'
+    | '/2'
+    | '/3'
+    | '/4'
+    | '/5'
+    | '/6'
+    | '/7'
+    | '/8'
+    | '/api/public/book/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
-  id: '__root__' | '/' | '/1' | '/2' | '/3' | '/4' | '/5' | '/6' | '/7' | '/8'
+  to:
+    | '/'
+    | '/1'
+    | '/2'
+    | '/3'
+    | '/4'
+    | '/5'
+    | '/6'
+    | '/7'
+    | '/8'
+    | '/api/public/book/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/1'
+    | '/2'
+    | '/3'
+    | '/4'
+    | '/5'
+    | '/6'
+    | '/7'
+    | '/8'
+    | '/api/public/book/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,6 +157,7 @@ export interface RootRouteChildren {
   R6Route: typeof R6Route
   R7Route: typeof R7Route
   R8Route: typeof R8Route
+  ApiPublicBookIdRoute: typeof ApiPublicBookIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -184,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R8RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/book/$id': {
+      id: '/api/public/book/$id'
+      path: '/api/public/book/$id'
+      fullPath: '/api/public/book/$id'
+      preLoaderRoute: typeof ApiPublicBookIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -197,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   R6Route: R6Route,
   R7Route: R7Route,
   R8Route: R8Route,
+  ApiPublicBookIdRoute: ApiPublicBookIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
