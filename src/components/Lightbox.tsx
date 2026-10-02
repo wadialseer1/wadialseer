@@ -5,8 +5,27 @@ export type LightboxItem = { src: string; caption?: string };
 
 export function useLightbox(items: LightboxItem[]) {
   const [index, setIndex] = useState<number | null>(null);
-  const close = useCallback(() => setIndex(null), []);
-  const open = useCallback((i: number) => setIndex(i), []);
+  const [closing, setClosing] = useState(false);
+  const close = useCallback(() => {
+    setClosing(true);
+    window.setTimeout(() => {
+      setIndex(null);
+      setClosing(false);
+    }, 200);
+  }, []);
+  const open = useCallback((i: number) => {
+    setClosing(false);
+    setIndex(i);
+  }, []);
+
+  useEffect(() => {
+    if (index === null) return;
+    for (const it of items) {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = it.src;
+    }
+  }, [index === null]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const move = useCallback(
     (step: number) => {
@@ -38,7 +57,7 @@ export function useLightbox(items: LightboxItem[]) {
         role="dialog"
         aria-modal="true"
         aria-label="عارض الصور"
-        className="lightbox-in fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 backdrop-blur-sm"
+        className={`lightbox-in fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 transition-opacity duration-200 ${closing ? "opacity-0" : "opacity-100"}`}
         onClick={close}
       >
         <button
@@ -85,7 +104,8 @@ export function useLightbox(items: LightboxItem[]) {
             key={items[index]!.src}
             src={items[index]!.src}
             alt={items[index]!.caption ?? ""}
-            className="lightbox-figure mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-premium"
+            decoding="async"
+            className="mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-premium"
           />
 
           {items[index]!.caption && (
