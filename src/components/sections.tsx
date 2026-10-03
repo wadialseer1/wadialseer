@@ -286,33 +286,26 @@ export function InitiativesSection() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-export function AssemblySection() {
-  const a = morningAssembly;
-  return (
-    <section className="section-pad border-y border-border bg-card/40">
-      <div className="container-site">
-        <SectionTitle eyebrow="الطابور الصباحي" title={a.title} />
-        <div className="mt-12 grid gap-10 lg:grid-cols-2">
-          <Reveal>
-            <div className="space-y-4 text-base leading-loose text-muted-foreground">
-              {a.intro.map((t) => <p key={t}>{t}</p>)}
-              <ul className="space-y-2 border-r-2 border-primary pr-4 text-foreground">
-                {a.points.map((t) => <li key={t}>{t}</li>)}
+        <Reveal className="mt-16 border-t border-border pt-12">
+          <article className="mx-auto max-w-4xl">
+            <p className="font-bold text-primary">الطابور الصباحي</p>
+            <h3 className="mt-3 text-2xl font-extrabold leading-snug sm:text-4xl">
+              {morningAssembly.title}
+            </h3>
+            <div className="mt-7 space-y-5 text-base leading-loose text-muted-foreground sm:text-lg">
+              {morningAssembly.intro.map((text) => <p key={text}>{text}</p>)}
+              <InitiativeGallery title="الطابور الصباحي" images={morningAssembly.images} columns={2} />
+              <ul className="space-y-2 border-r-2 border-primary pr-5 text-foreground">
+                {morningAssembly.points.map((text) => <li key={text}>{text}</li>)}
               </ul>
-              {a.outro.map((t) => <p key={t}>{t}</p>)}
-              <p className="pt-2 text-sm font-semibold text-muted-foreground">{a.signature}</p>
-              <p className="text-xl font-extrabold text-primary">{a.motto}</p>
+              {morningAssembly.outro.map((text) => <p key={text}>{text}</p>)}
+              <footer className="border-t border-border pt-5">
+                <p className="text-sm font-semibold text-muted-foreground">{morningAssembly.signature}</p>
+                <p className="mt-2 text-xl font-extrabold text-primary">{morningAssembly.motto}</p>
+              </footer>
             </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <InitiativeGallery title="الطابور الصباحي" images={a.images} columns={2} />
-          </Reveal>
-        </div>
+          </article>
+        </Reveal>
       </div>
     </section>
   );

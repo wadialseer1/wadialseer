@@ -5,7 +5,7 @@ import { textbookIds } from "@/data/textbooks";
 export const Route = createFileRoute("/api/public/book/$id")({
   server: {
     handlers: {
-      GET: async ({ params }) => {
+      GET: async ({ params, request }) => {
         const id = Number(params.id);
         if (!Number.isInteger(id) || !textbookIds.has(id)) {
           return new Response("Not found", { status: 404 });
