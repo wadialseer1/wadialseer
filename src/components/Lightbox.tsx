@@ -1,18 +1,21 @@
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+
 export type LightboxItem = { src: string; caption?: string };
 
 export function useLightbox(items: LightboxItem[]) {
   const [index, setIndex] = useState<number | null>(null);
   const [closing, setClosing] = useState(false);
   const close = useCallback(() => {
+    if (closing) return;
     setClosing(true);
     window.setTimeout(() => {
       setIndex(null);
       setClosing(false);
     }, 200);
-  }, []);
+  }, [closing]);
   const open = useCallback((i: number) => {
     setClosing(false);
     setIndex(i);
@@ -51,48 +54,55 @@ export function useLightbox(items: LightboxItem[]) {
     };
   }, [index, close, move]);
 
+  const activeItem = index === null ? undefined : items[index];
   const view =
-    index === null ? null : (
+    !activeItem ? null : (
       <div
         role="dialog"
         aria-modal="true"
         aria-label="عارض الصور"
-        className={`lightbox-in fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 transition-opacity duration-200 ${closing ? "opacity-0" : "opacity-100"}`}
+        className={`lightbox-in fixed inset-0 z-100 grid place-items-center bg-navy-deep/95 p-4 transition-opacity duration-300 ${closing ? "pointer-events-none opacity-0" : "opacity-100"}`}
         onClick={close}
       >
-        <button
+        <Button
           type="button"
           onClick={close}
           aria-label="إغلاق"
-          className="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground"
+          size="icon"
+          variant="secondary"
+          className="absolute left-4 top-4 h-11 w-11 rounded-full"
         >
           <X className="h-5 w-5" />
-        </button>
+        </Button>
 
         {items.length > 1 && (
           <>
-            <button
+            <Button
               type="button"
               aria-label="السابق"
               onClick={(e) => {
                 e.stopPropagation();
                 move(-1);
               }}
-              className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-border bg-card/90 text-foreground"
+              size="icon"
+              variant="secondary"
+              className="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full"
             >
               <ChevronRight className="h-5 w-5" />
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               aria-label="التالي"
               onClick={(e) => {
                 e.stopPropagation();
                 move(1);
               }}
-              className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-border bg-card/90 text-foreground"
+              size="icon"
+              variant="secondary"
+              className="absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full"
             >
               <ChevronLeft className="h-5 w-5" />
-            </button>
+            </Button>
           </>
         )}
 
@@ -101,16 +111,16 @@ export function useLightbox(items: LightboxItem[]) {
           onClick={(e) => e.stopPropagation()}
         >
           <img
-            key={items[index]!.src}
-            src={items[index]!.src}
-            alt={items[index]!.caption ?? ""}
+            key={activeItem.src}
+            src={activeItem.src}
+            alt={activeItem.caption ?? ""}
             decoding="async"
             className="mx-auto max-h-[78vh] w-auto rounded-2xl object-contain shadow-premium"
           />
 
-          {items[index]!.caption && (
+          {activeItem.caption && (
             <figcaption className="mt-4 text-center text-sm font-semibold text-foreground/90">
-              {items[index]!.caption}
+              {activeItem.caption}
             </figcaption>
           )}
         </figure>
