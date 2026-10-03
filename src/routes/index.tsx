@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import {
   AboutSection,
-  AssemblySection,
   BtecSection,
   ContactSection,
   Hero,
@@ -63,7 +62,6 @@ function Index() {
       <AboutSection />
       <StaffSection />
       <InitiativesSection />
-      <AssemblySection />
       <BtecSection />
       <LocationSection />
       <PlatformsSection />

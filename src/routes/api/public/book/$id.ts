@@ -14,10 +14,12 @@ export const Route = createFileRoute("/api/public/book/$id")({
         if (!upstream.ok || !upstream.body) {
           return new Response("Unavailable", { status: 502 });
         }
+        const requestUrl = new URL(request.url);
+        const disposition = requestUrl.searchParams.get("download") === "1" ? "attachment" : "inline";
         return new Response(upstream.body, {
           headers: {
             "content-type": "application/pdf",
-            "content-disposition": `inline; filename="Wadialseer_${id}.pdf"`,
+            "content-disposition": `${disposition}; filename="Wadialseer_${id}.pdf"`,
             "cache-control": "public, max-age=86400",
           },
         });

@@ -55,11 +55,11 @@ export const school = {
   phone: "065823102",
   phoneDisplay: "(06) 582 3102",
   email: "wadialseer1@gmail.com",
-  facebook: "https://www.facebook.com/profile.php?id=100080898687099",
+  facebook: "https://www.facebook.com/share/1EShLJRySp/",
   coords: { lat: 31.95416, lng: 35.82155 },
   tagline:
     "مدرسة أساسية للبنين في لواء وادي السير، تضم الصفوف من الرابع حتى العاشر بفترتين دراسيتين صباحية ومسائية.",
-  credit: "تم إنشاؤه بواسطة محمد قصراوي",
+  credit: "تم إنشاؤه بواسطة قصي الصوالحي",
 };
 
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${school.coords.lat},${school.coords.lng}`;
