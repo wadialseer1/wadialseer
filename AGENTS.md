@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep textbook source records flat and group them by grade and subject in the UI so every PDF remains independently openable and downloadable.
