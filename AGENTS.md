@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep textbook source records flat and group them by grade and subject in the UI so every PDF remains independently openable and downloadable.
+- Mount site-wide transient controls, such as scroll-to-top, in the root layout so they work consistently on every route.
