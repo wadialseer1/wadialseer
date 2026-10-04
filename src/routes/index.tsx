@@ -62,9 +62,9 @@ function Index() {
       <AboutSection />
       <StaffSection />
       <InitiativesSection />
-      <BtecSection />
       <LocationSection />
       <PlatformsSection />
+      <BtecSection />
       <ContactSection />
     </>
   );

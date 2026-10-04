@@ -10,9 +10,9 @@ const nav = [
   { label: "عن المدرسة", to: routes.about },
   { label: "الهيئة الإدارية والتدريسية", to: routes.staff },
   { label: "المبادرات المدرسية", to: routes.initiatives },
-  { label: "نظام BTEC", to: routes.btec },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
+  { label: "نظام BTEC", to: routes.btec },
   { label: "الكتب المدرسية", to: routes.textbooks },
   { label: "تواصل معنا", to: routes.contact },
 ];

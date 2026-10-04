@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SchoolSplash } from "@/components/SchoolSplash";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 
 function NotFoundComponent() {
@@ -139,6 +140,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
+        <ScrollToTop />
       </div>
     </QueryClientProvider>
   );
