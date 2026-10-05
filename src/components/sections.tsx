@@ -128,7 +128,7 @@ export function AboutSection() {
               <p className="mt-4 leading-loose text-muted-foreground">{school.vision}</p>
             </article>
           </Reveal>
-          <Reveal delay={140} className="lg:col-span-5">
+          <Reveal delay={140} className="lg:col-span-2">
             <article className="card-premium h-full p-8 sm:p-10">
               <h3 className="text-2xl font-extrabold sm:text-3xl">بيانات المدرسة</h3>
               <dl className="mt-5 divide-y divide-border">
