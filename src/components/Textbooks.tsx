@@ -1,4 +1,4 @@
-import { BookMarked, BookOpen, BookText, Download, Library, Search, X } from "lucide-react";
+import { BookMarked, BookText, Download, Library, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,6 @@ export function TextbooksSection() {
   const [grade, setGrade] = useState(grades[0] ?? "");
   const [subject, setSubject] = useState("الكل");
   const [query, setQuery] = useState("");
-  const [book, setBook] = useState<Textbook | null>(null);
   const subjects = useMemo(
     () => [...new Set(textbooks.filter((item) => item.grade === grade).map((item) => item.subject))],
     [grade],
@@ -56,14 +55,14 @@ export function TextbooksSection() {
         <div className="max-w-3xl">
           <p className="font-bold text-primary">مكتبة الطالب</p>
           <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">الكتب المدرسية</h2>
-          <p className="mt-3 text-muted-foreground">اختر الصف والمادة، ثم افتح كتاب الطالب أو الأنشطة للفصل المطلوب أو نزّله مباشرة.</p>
+          <p className="mt-3 text-muted-foreground">اختر الصف والمادة، ثم نزّل كتاب الطالب أو الأنشطة للفصل المطلوب مباشرة إلى جهازك.</p>
         </div>
 
-        <div className="mt-8 border-b border-border pb-5">
+        <div className="sticky top-18 z-20 mt-8 rounded-lg border border-border bg-background/95 p-4 shadow-premium backdrop-blur-md sm:p-5">
           <p className="mb-3 text-sm font-bold text-foreground">اختر الصف</p>
-          <div className="flex gap-2 overflow-x-auto pb-2">
+          <div className="flex snap-x gap-2 overflow-x-auto pb-2">
             {grades.map((item) => (
-              <Button key={item} type="button" variant={item === grade ? "default" : "secondary"} onClick={() => chooseGrade(item)} className="h-11 shrink-0 rounded-full px-5 font-bold">
+              <Button key={item} type="button" variant={item === grade ? "default" : "secondary"} onClick={() => chooseGrade(item)} className="h-11 shrink-0 snap-start rounded-md px-5 font-bold">
                 {item}
               </Button>
             ))}
@@ -85,11 +84,13 @@ export function TextbooksSection() {
           </label>
         </div>
 
-        <div className="mt-9 grid items-start gap-6 xl:grid-cols-2">
+        <p className="mt-6 text-sm font-semibold text-muted-foreground">يعرض الآن: <span className="text-primary">{grade}</span>{subject !== "الكل" ? ` — ${subject}` : " — جميع المواد"}</p>
+
+        <div className="mt-5 grid items-start gap-6 xl:grid-cols-2">
           {groups.map((group) => (
             <article key={group.subject} className="overflow-hidden rounded-lg border border-border bg-card shadow-premium">
               <header className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 border-b border-primary/30 bg-navy p-5 text-foreground">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-gold text-primary-foreground">
                   <Library className="h-6 w-6" />
                 </span>
                 <div className="min-w-0">
@@ -114,12 +115,11 @@ export function TextbooksSection() {
                               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>
                               <p className="min-w-0 font-bold text-foreground">{cleanTitle(item.title)}</p>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                              <Button type="button" size="sm" onClick={() => setBook(item)}><BookOpen /> فتح</Button>
-                              <Button asChild size="sm" variant="outline">
-                                <a href={`/api/public/book/${item.file}?download=1`} download={`Wadialseer_${item.file}.pdf`}><Download /> تنزيل</a>
-                              </Button>
-                            </div>
+                            <Button asChild size="lg" className="w-full font-bold">
+                              <a href={`https://www.minhaji.net/download/${item.file}`} download>
+                                <Download /> تنزيل الكتاب
+                              </a>
+                            </Button>
                           </div>
                         );
                       })}
@@ -132,15 +132,6 @@ export function TextbooksSection() {
         </div>
       </div>
 
-      {book && (
-        <div className="fixed inset-0 z-100 flex flex-col bg-background">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-border p-3">
-            <p className="min-w-0 truncate font-bold">{book.subject} — {book.title}</p>
-            <Button type="button" size="icon" variant="ghost" aria-label="إغلاق" onClick={() => setBook(null)}><X className="h-6 w-6" /></Button>
-          </div>
-          <iframe title={book.title} src={`/api/public/book/${book.file}`} className="w-full flex-1" />
-        </div>
-      )}
     </section>
   );
 }

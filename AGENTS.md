@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep textbook source records flat and group them by grade and subject in the UI so every PDF remains independently openable and downloadable.
+- Keep textbook source records flat and group them by grade, subject, and semester; each PDF is download-only from its canonical source.
 - Mount site-wide transient controls, such as scroll-to-top, in the root layout so they work consistently on every route.
