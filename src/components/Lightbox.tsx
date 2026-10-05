@@ -122,7 +122,9 @@ export function useLightbox(items: LightboxItem[]) {
         scale: transformRef.current.scale,
       };
     } else if (points.length === 2) {
-      gestureRef.current.distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+      const [first, second] = points;
+      if (!first || !second) return;
+      gestureRef.current.distance = Math.hypot(first.x - second.x, first.y - second.y);
       gestureRef.current.scale = transformRef.current.scale;
     }
   };
@@ -132,7 +134,9 @@ export function useLightbox(items: LightboxItem[]) {
     pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const points = [...pointersRef.current.values()];
     if (points.length === 2 && gestureRef.current.distance > 0) {
-      const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+      const [first, second] = points;
+      if (!first || !second) return;
+      const distance = Math.hypot(first.x - second.x, first.y - second.y);
       zoomAt(gestureRef.current.scale * distance / gestureRef.current.distance);
     } else if (points.length === 1 && transformRef.current.scale > 1) {
       setOffset({

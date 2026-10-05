@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone, School, Target, UsersRound } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
@@ -113,8 +113,22 @@ export function AboutSection() {
     <section className="section-pad" id="about">
       <div className="container-site">
         <SectionTitle eyebrow="عن المدرسة" title="نبذة عن المدرسة" />
-        <div className="mt-12 grid gap-6 lg:grid-cols-5">
-          <Reveal delay={140} className="lg:col-span-5">
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <Reveal>
+            <article className="card-premium h-full border-t-4 border-t-primary p-8 sm:p-10">
+              <Target className="h-9 w-9 text-primary" />
+              <h3 className="mt-5 text-2xl font-extrabold">هدف المدرسة</h3>
+              <p className="mt-4 leading-loose text-muted-foreground">{school.goal}</p>
+            </article>
+          </Reveal>
+          <Reveal delay={80}>
+            <article className="card-premium h-full border-t-4 border-t-info p-8 sm:p-10">
+              <School className="h-9 w-9 text-info" />
+              <h3 className="mt-5 text-2xl font-extrabold">رؤية المدرسة</h3>
+              <p className="mt-4 leading-loose text-muted-foreground">{school.vision}</p>
+            </article>
+          </Reveal>
+          <Reveal delay={140} className="lg:col-span-2">
             <article className="card-premium h-full p-8 sm:p-10">
               <h3 className="text-2xl font-extrabold sm:text-3xl">بيانات المدرسة</h3>
               <dl className="mt-5 divide-y divide-border">
@@ -156,22 +170,29 @@ export function StaffSection() {
   return (
     <section className="section-pad">
       <div className="container-site">
-        <SectionTitle eyebrow="فريق المدرسة" title="الهيئة الإدارية والتدريسية" />
+        <SectionTitle eyebrow="فريق المدرسة" title="الهيكل التنظيمي الإداري والتدريسي لمدرسة وادي السير الأساسية للبنين" />
 
-        <h3 className="mt-14 mb-6 text-2xl font-extrabold sm:text-3xl">الهيئة الإدارية</h3>
-        <PeopleRow people={administration} />
+        <div className="mx-auto mt-14 max-w-6xl">
+          <div className="mx-auto grid h-14 w-14 place-items-center rounded-md bg-primary text-primary-foreground shadow-gold">
+            <UsersRound className="h-7 w-7" />
+          </div>
+          <div className="mx-auto h-8 w-px bg-border" />
+          <h3 className="mb-6 text-center text-2xl font-extrabold sm:text-3xl">الهيئة الإدارية</h3>
+          <PeopleRow people={administration} />
+        </div>
 
-        <h3 className="mt-16 mb-6 text-2xl font-extrabold sm:text-3xl">الهيئة التدريسية</h3>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 h-10 w-px bg-border" />
+        <h3 className="mb-6 text-center text-2xl font-extrabold sm:text-3xl">الهيئة التدريسية</h3>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {teacherGroups.map((group, i) => (
             <Reveal key={group.subject} delay={(i % 3) * 60}>
-              <article className="card-premium h-full p-6">
+              <article className="h-full overflow-hidden rounded-lg border border-border bg-card shadow-premium">
                 <h4 className="border-b border-border pb-3 text-xl font-extrabold text-primary">
-                  {group.subject}
+                  <span className="block bg-navy px-5 py-4">{group.subject}</span>
                 </h4>
-                <ul className="mt-4 space-y-2 text-base text-muted-foreground">
+                <ul className="grid gap-1 p-5 text-base text-muted-foreground">
                   {group.names.map((name) => (
-                    <li key={name} className="font-semibold text-info">{name}</li>
+                    <li key={name} className="border-b border-border py-2 font-semibold text-info last:border-0">{name}</li>
                   ))}
                 </ul>
               </article>
