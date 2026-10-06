@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ExternalLink, Mail, MapPin, Navigation, Phone, School, Target, UsersRound } from "lucide-react";
+import { ArrowLeft, Atom, BriefcaseBusiness, Calculator, Computer, Dumbbell, Earth, ExternalLink, FlaskConical, Languages, Mail, MapPin, Navigation, Palette, Phone, School, Target, UserRound, UsersRound, Wrench } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
@@ -156,7 +156,10 @@ function PeopleRow({ people }: { people: Person[] }) {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {people.map((person, i) => (
         <Reveal key={person.name} delay={(i % 4) * 60}>
-          <div className="card-premium p-6 text-center">
+          <div className="card-premium h-full border-t-2 border-t-primary p-6 text-center">
+            <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary">
+              <UserRound className="h-5 w-5" />
+            </span>
             <h3 className="text-lg font-bold">{person.name}</h3>
             <p className="mt-1 text-sm text-primary">{person.role}</p>
           </div>
@@ -164,6 +167,20 @@ function PeopleRow({ people }: { people: Person[] }) {
       ))}
     </div>
   );
+}
+
+function subjectIcon(subject: string) {
+  if (/رياضيات/.test(subject)) return Calculator;
+  if (/علوم|فيزياء|أحياء/.test(subject)) return Atom;
+  if (/كيمياء/.test(subject)) return FlaskConical;
+  if (/حاسوب/.test(subject)) return Computer;
+  if (/عربية|إنجليزية/.test(subject)) return Languages;
+  if (/اجتماعيات|أرض/.test(subject)) return Earth;
+  if (/رياضية/.test(subject)) return Dumbbell;
+  if (/فنية/.test(subject)) return Palette;
+  if (/مهنية|نظافة/.test(subject)) return Wrench;
+  if (/مالية/.test(subject)) return BriefcaseBusiness;
+  return School;
 }
 
 export function StaffSection() {
@@ -186,11 +203,13 @@ export function StaffSection() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {teacherGroups.map((group, i) => (
             <Reveal key={group.subject} delay={(i % 3) * 60}>
-              <article className="h-full overflow-hidden rounded-lg border border-border bg-card shadow-premium">
-                <h4 className="border-b border-border pb-3 text-xl font-extrabold text-primary">
-                  <span className="block bg-navy px-5 py-4">{group.subject}</span>
-                </h4>
-                <ul className="grid gap-1 p-5 text-base text-muted-foreground">
+              <article className="card-premium h-full border-t-2 border-t-primary p-6 text-center">
+                {(() => {
+                  const Icon = subjectIcon(group.subject);
+                  return <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>;
+                })()}
+                <h4 className="mt-4 text-xl font-extrabold">{group.subject}</h4>
+                <ul className="mt-3 grid gap-1 text-base text-muted-foreground">
                   {group.names.map((name) => (
                     <li key={name} className="border-b border-border py-2 font-semibold text-info last:border-0">{name}</li>
                   ))}
@@ -307,9 +326,12 @@ export function InitiativesSection() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-16 border-t border-border pt-12">
-          <article className="mx-auto max-w-4xl">
-            <p className="font-bold text-primary">الطابور الصباحي</p>
+        <Reveal className="mt-16">
+          <article className="card-premium mx-auto max-w-4xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><UsersRound className="h-5 w-5" /></span>
+              <p className="font-bold text-primary">الطابور الصباحي</p>
+            </div>
             <h3 className="mt-3 text-2xl font-extrabold leading-snug sm:text-4xl">
               {morningAssembly.title}
             </h3>

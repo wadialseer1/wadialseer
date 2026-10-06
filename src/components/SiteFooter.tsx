@@ -10,8 +10,8 @@ const links = [
   { label: "المبادرات المدرسية", to: routes.initiatives },
   { label: "موقع المدرسة", to: routes.location },
   { label: "المنصات التعليمية", to: routes.platforms },
-  { label: "نظام BTEC", to: routes.btec },
   { label: "الكتب المدرسية", to: routes.textbooks },
+  { label: "نظام BTEC", to: routes.btec },
   { label: "تواصل معنا", to: routes.contact },
 ];
 
