@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Atom, BriefcaseBusiness, Calculator, Computer, Dumbbell, Earth, ExternalLink, FlaskConical, Languages, Mail, MapPin, Navigation, Palette, Phone, School, Target, UserRound, UsersRound, Wrench } from "lucide-react";
+import { ArrowLeft, Atom, BriefcaseBusiness, Calculator, Computer, Dumbbell, Earth, ExternalLink, FlaskConical, Languages, Mail, MapPin, MessageCircle, Navigation, Palette, Phone, School, Target, UserRound, UsersRound, Wrench } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal } from "@/components/Reveal";
@@ -19,6 +19,9 @@ import {
   schoolFacts,
   teacherGroups,
   morningAssembly,
+  highlightedNames,
+  whatsappGroups,
+  whatsappIntro,
   type Person,
 } from "@/data/school";
 
@@ -283,22 +286,60 @@ function InitiativeGallery({ title, images, columns = 4 }: { title: string; imag
   );
 }
 
-const highlightedNames = ["زيد الحسامي", "هيثم القرعان"];
+const escapeRe = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const namePattern = [...highlightedNames].sort((x, y) => y.length - x.length).map(escapeRe).join("|");
+const datePattern = "[0-9\u0660-\u0669]+(?:\\s*[–\\-/]\\s*[0-9\u0660-\u0669]+)*";
+const highlightRe = new RegExp(`(${namePattern}|${datePattern})`, "g");
 
 function HighlightNames({ text }: { text: string }) {
-  const parts = text.split(new RegExp(`(${highlightedNames.join("|")})`, "g"));
+  const parts = text.split(highlightRe);
   return (
     <>
       {parts.map((part, i) =>
-        highlightedNames.includes(part) ? (
-          <strong key={i} className="font-bold text-info">
-            {part}
-          </strong>
+        i % 2 === 1 ? (
+          highlightedNames.includes(part) ? (
+            <strong key={i} className="font-bold text-info">{part}</strong>
+          ) : (
+            <strong key={i} className="rounded bg-primary/15 px-1 font-bold text-primary">{part}</strong>
+          )
         ) : (
           <span key={i}>{part}</span>
         ),
       )}
     </>
+  );
+}
+
+function WhatsappGroups() {
+  return (
+    <Reveal className="mt-16">
+      <article className="card-premium mx-auto max-w-5xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
+        <div className="flex items-center gap-3">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><MessageCircle className="h-5 w-5" /></span>
+          <p className="font-bold text-primary">التواصل مع أولياء الأمور</p>
+        </div>
+        <h3 className="mt-3 text-2xl font-extrabold leading-snug sm:text-3xl">روابط مجموعات الواتساب لكل صف وشعبة</h3>
+        <div className="mt-5 space-y-3 text-base leading-loose text-muted-foreground">
+          {whatsappIntro.map((t) => <p key={t}>{t}</p>)}
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {whatsappGroups.map((g) => (
+            <div key={g.grade} className="rounded-xl border border-primary/30 bg-secondary/40 p-4">
+              <h4 className="mb-3 flex items-center gap-2 font-extrabold text-info"><UsersRound className="h-4 w-4" />الصف {g.grade}</h4>
+              <div className="flex flex-wrap gap-2">
+                {g.sections.map((sec) => (
+                  <a key={sec.url} href={sec.url} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-gold transition-transform hover:scale-[1.04]">
+                    <MessageCircle className="h-4 w-4" />
+                    {sec.name.split(" ")[1]}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </article>
+    </Reveal>
   );
 }
 
@@ -318,14 +359,15 @@ export function InitiativesSection() {
                   </p>
                 )}
                 <h3 className="mt-4 text-xl font-extrabold sm:text-2xl">{item.title}</h3>
-                <p className="mt-3 text-base leading-loose text-muted-foreground">
-                  <HighlightNames text={item.description} />
-                </p>
+                <div className="mt-3 space-y-2 text-base leading-loose text-muted-foreground">
+                  {item.paragraphs.map((t, k) => <p key={k}><HighlightNames text={t} /></p>)}
+                </div>
                 <InitiativeGallery title={item.title} images={item.images} />
               </article>
             </Reveal>
           ))}
         </div>
+        <WhatsappGroups />
         <Reveal className="mt-16">
           <article className="card-premium mx-auto max-w-4xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
             <div className="flex items-center gap-3">
