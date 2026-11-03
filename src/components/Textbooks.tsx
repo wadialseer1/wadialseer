@@ -130,9 +130,10 @@ export function TextbooksSection() {
                               <p className="min-w-0 font-bold text-foreground">{cleanTitle(item.title)}</p>
                             </div>
                             <a href={`https://www.minhaji.net/download/${item.file}`} download
-                              className="group mt-auto inline-flex h-12 w-full items-center justify-between gap-3 rounded-lg border border-primary/50 bg-navy pr-4 pl-1.5 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                              <span>تنزيل الكتاب <span className="text-xs font-normal text-muted-foreground">PDF</span></span>
-                              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground transition-transform group-hover:translate-y-0.5"><Download className="h-4 w-4" /></span>
+                              className="btn-shine group mt-auto inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-gold transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                              <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
+                              <span>تنزيل الكتاب</span>
+                              <span className="rounded-full bg-primary-foreground/15 px-2 py-0.5 text-[11px]">PDF</span>
                             </a>
                           </div>
                         );

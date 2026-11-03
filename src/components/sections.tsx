@@ -291,7 +291,9 @@ function InitiativeGallery({ title, images, columns = 4 }: { title: string; imag
 const escapeRe = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const namePattern = [...highlightedNames].sort((x, y) => y.length - x.length).map(escapeRe).join("|");
 const datePattern = "[0-9\u0660-\u0669]+(?:\\s*[–\\-/]\\s*[0-9\u0660-\u0669]+)*";
-const highlightRe = new RegExp(`(${namePattern}|${datePattern})`, "g");
+const keywords = ["المركز الأول", "لمدرستي أنتمي", "وبالعطاء أرتقي", "الطابور الصباحي", "بطولة", "مبادرة", "مبادرات", "الانتماء", "التعاون", "المسؤولية", "التميز", "الإبداع", "النجاح", "يوم المعلم", "الاستقلال", "عيد", "الأبطال", "أبطالنا", "الفائزين", "تكريم", "شكر"];
+const keywordPattern = keywords.sort((x, y) => y.length - x.length).map(escapeRe).join("|");
+const highlightRe = new RegExp(`(${namePattern}|${keywordPattern}|${datePattern})`, "g");
 
 function HighlightNames({ text }: { text: string }) {
   const parts = text.split(highlightRe);
@@ -301,6 +303,8 @@ function HighlightNames({ text }: { text: string }) {
         i % 2 === 1 ? (
           highlightedNames.includes(part) ? (
             <strong key={i} className="font-bold text-info">{part}</strong>
+          ) : keywords.includes(part) ? (
+            <strong key={i} className="font-bold text-gold-soft">{part}</strong>
           ) : (
             <strong key={i} className="rounded bg-primary/15 px-1 font-bold text-primary">{part}</strong>
           )
@@ -320,33 +324,50 @@ function WhatsappIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function WhatsappCard({ period, intro, groups }: { period: string; intro: string[]; groups: typeof whatsappGroups }) {
+function WhatsappGroups() {
+  const periods = [
+    { key: "am", label: "الفترة الصباحية", intro: whatsappIntro, groups: whatsappGroups },
+    { key: "pm", label: "الفترة المسائية", intro: whatsappEveningIntro, groups: whatsappEveningGroups },
+  ];
+  const [active, setActive] = useState("am");
+  const [showText, setShowText] = useState(false);
+  const period = periods.find((p) => p.key === active) ?? periods[0]!;
   return (
-    <Reveal>
-      <article className="card-premium h-full border-t-4 border-t-primary p-5 shadow-premium sm:p-8">
-        <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-gold"><WhatsappIcon className="h-6 w-6" /></span>
-          <div>
-            <p className="text-sm font-bold text-primary">إعلان هام إلى أولياء الأمور</p>
-            <h3 className="text-xl font-extrabold sm:text-2xl">مجموعات واتساب {period}</h3>
+    <Reveal className="mt-10">
+      <article className="card-premium mx-auto max-w-5xl border-t-4 border-t-whatsapp p-5 shadow-premium sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-whatsapp text-whatsapp-foreground"><WhatsappIcon className="h-7 w-7" /></span>
+            <div>
+              <p className="text-sm font-bold text-primary">إعلان هام إلى أولياء الأمور الكرام</p>
+              <h3 className="text-xl font-extrabold sm:text-2xl">مجموعات <span className="text-whatsapp">واتساب</span> الصفوف والشُّعب</h3>
+            </div>
+          </div>
+          <div role="tablist" className="flex rounded-full border border-border bg-secondary/60 p-1">
+            {periods.map((p) => (
+              <button key={p.key} role="tab" aria-selected={active === p.key} type="button" onClick={() => setActive(p.key)}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${active === p.key ? "bg-primary text-primary-foreground shadow-gold" : "text-muted-foreground hover:text-foreground"}`}>
+                {p.label}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="mt-4 space-y-2 text-sm leading-loose text-muted-foreground sm:text-base">
-          {intro.map((t) => <p key={t}>{t}</p>)}
+        <div className="mt-4 text-sm leading-loose text-muted-foreground sm:text-base">
+          <p>{period.intro[1]}</p>
+          {showText && period.intro.filter((_, i) => i !== 1).map((t) => <p key={t} className="mt-2">{t}</p>)}
+          <button type="button" onClick={() => setShowText((v) => !v)} className="mt-1 text-sm font-bold text-primary hover:underline">{showText ? "إخفاء" : "قراءة الإعلان كاملًا"}</button>
         </div>
-        <div className="mt-6 space-y-3">
-          {groups.map((g) => (
-            <div key={g.grade} className="rounded-xl border border-primary/25 bg-secondary/40 p-3 sm:p-4">
-              <h4 className="mb-2.5 flex items-center gap-2 text-sm font-extrabold text-info"><UsersRound className="h-4 w-4" />الصف {g.grade}</h4>
-              <div className="grid grid-cols-2 gap-2 min-[420px]:grid-cols-4">
-                {g.sections.map((sec) => (
-                  <a key={sec.url} href={sec.url} target="_blank" rel="noopener noreferrer" aria-label={`مجموعة واتساب ${sec.name}`}
-                    className="group inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-navy px-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-gold">
-                    <WhatsappIcon className="h-4 w-4 shrink-0 text-primary transition-colors group-hover:text-primary-foreground" />
-                    {sec.name.replace(`${g.grade} `, "")}
-                  </a>
-                ))}
-              </div>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {period.groups.map((g) => (
+            <div key={g.grade} className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-secondary/40 p-3">
+              <span className="ml-1 min-w-24 text-sm font-extrabold text-info">الصف {g.grade}</span>
+              {g.sections.map((sec) => (
+                <a key={sec.url} href={sec.url} target="_blank" rel="noopener noreferrer" aria-label={`انضم إلى مجموعة واتساب ${sec.name}`}
+                  className="btn-shine inline-flex h-10 items-center gap-1.5 rounded-full bg-whatsapp pr-3 pl-4 text-sm font-extrabold text-whatsapp-foreground shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-gold">
+                  <WhatsappIcon className="h-4 w-4" />
+                  {sec.name.replace(`${g.grade} `, "")}
+                </a>
+              ))}
             </div>
           ))}
         </div>
@@ -355,56 +376,88 @@ function WhatsappCard({ period, intro, groups }: { period: string; intro: string
   );
 }
 
-function WhatsappGroups() {
+function InitiativeCard({ item }: { item: (typeof initiatives)[number] }) {
+  const [openText, setOpenText] = useState(false);
+  const { open, view } = useLightbox(item.images.map((src) => ({ src, caption: item.title })));
+  const cover = item.images[0];
   return (
-    <div className="mt-10 grid items-start gap-6 lg:grid-cols-2">
-      <WhatsappCard period="الفترة الصباحية" intro={whatsappIntro} groups={whatsappGroups} />
-      <WhatsappCard period="الفترة المسائية" intro={whatsappEveningIntro} groups={whatsappEveningGroups} />
+    <article className="card-premium flex h-full flex-col overflow-hidden">
+      {cover && (
+        <button type="button" onClick={() => open(0)} className="relative block aspect-[16/10] overflow-hidden bg-secondary">
+          <img src={cover} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
+          {item.images.length > 1 && (
+            <span className="absolute bottom-3 left-3 rounded-full bg-navy-deep/85 px-3 py-1 text-xs font-bold text-primary">{item.images.length} صور</span>
+          )}
+        </button>
+      )}
+      <div className="flex flex-1 flex-col p-5">
+        {item.date && <p className="w-fit rounded-full border border-info/30 bg-info/10 px-3 py-1 text-xs font-bold text-info">{item.date}</p>}
+        <h3 className="mt-3 text-lg font-extrabold leading-snug text-primary sm:text-xl">{item.title}</h3>
+        <div className={`mt-2 space-y-2 text-sm leading-loose text-muted-foreground ${openText ? "" : "line-clamp-3"}`}>
+          {item.paragraphs.map((t, k) => <p key={k}><HighlightNames text={t} /></p>)}
+        </div>
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+          <button type="button" onClick={() => setOpenText((v) => !v)} className="rounded-full border border-primary/40 px-4 py-1.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">
+            {openText ? "عرض أقل" : "اقرأ المزيد"}
+          </button>
+          {item.images.length > 1 && (
+            <button type="button" onClick={() => open(0)} className="rounded-full bg-secondary px-4 py-1.5 text-sm font-bold text-foreground hover:bg-accent">معرض الصور</button>
+          )}
+        </div>
+      </div>
+      {view}
+    </article>
+  );
+}
+
+function InitiativesGrid() {
+  const perPage = 6;
+  const [count, setCount] = useState(perPage);
+  return (
+    <div className="mt-12">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {initiatives.slice(0, count).map((item) => <InitiativeCard key={item.title} item={item} />)}
+      </div>
+      {count < initiatives.length && (
+        <div className="mt-8 text-center">
+          <button type="button" onClick={() => setCount((c) => c + perPage)} className="btn-shine rounded-full bg-primary px-8 py-3 font-extrabold text-primary-foreground shadow-gold transition-transform hover:-translate-y-0.5">
+            عرض مبادرات أخرى ({initiatives.length - count})
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 export function InitiativesSection() {
+  const [assemblyMore, setAssemblyMore] = useState(false);
   return (
     <section className="section-pad">
       <div className="container-site">
         <SectionTitle eyebrow="أنشطتنا" title="مبادرات مدرسية متنوعة" />
         <WhatsappGroups />
-        <div className="mt-14 space-y-10 border-r border-border pr-6 sm:pr-10">
-          {initiatives.map((item, i) => (
-            <Reveal key={item.title} delay={i * 90}>
-              <article className="relative card-premium p-6 sm:p-9">
-                <span className="absolute -right-[calc(1.5rem+9px)] top-10 hidden h-4 w-4 rounded-full bg-primary shadow-gold sm:-right-[calc(2.5rem+9px)] sm:block" />
-                {item.date && (
-                  <p className="inline-block rounded-full border border-info/30 bg-info/10 px-3 py-1.5 text-xs font-bold text-info">
-                    {item.date}
-                  </p>
-                )}
-                <h3 className="mt-4 text-xl font-extrabold sm:text-2xl">{item.title}</h3>
-                <div className="mt-3 space-y-2 text-base leading-loose text-muted-foreground">
-                  {item.paragraphs.map((t, k) => <p key={k}><HighlightNames text={t} /></p>)}
-                </div>
-                <InitiativeGallery title={item.title} images={item.images} />
-              </article>
-            </Reveal>
-          ))}
-        </div>
+        <InitiativesGrid />
         <Reveal className="mt-16">
           <article className="card-premium mx-auto max-w-4xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><UsersRound className="h-5 w-5" /></span>
               <p className="font-bold text-primary">الطابور الصباحي</p>
             </div>
-            <h3 className="mt-3 text-2xl font-extrabold leading-snug sm:text-4xl">
+            <h3 className="mt-3 text-2xl font-extrabold leading-snug text-primary sm:text-4xl">
               {morningAssembly.title}
             </h3>
             <div className="mt-7 space-y-5 text-base leading-loose text-muted-foreground sm:text-lg">
               {morningAssembly.intro.map((text) => <p key={text}>{text}</p>)}
               <InitiativeGallery title="الطابور الصباحي" images={morningAssembly.images} columns={2} />
+              {!assemblyMore && (
+                <button type="button" onClick={() => setAssemblyMore(true)} className="rounded-full border border-primary/40 px-5 py-2 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground">اقرأ المزيد</button>
+              )}
+              {assemblyMore && <>
               <ul className="space-y-2 border-r-2 border-primary pr-5 text-foreground">
                 {morningAssembly.points.map((text) => <li key={text}>{text}</li>)}
               </ul>
               {morningAssembly.outro.map((text) => <p key={text}>{text}</p>)}
+              </>}
               <footer className="border-t border-border pt-5">
                 <p className="text-sm font-semibold text-muted-foreground">{morningAssembly.signature}</p>
                 <p className="mt-2 text-xl font-extrabold text-primary">{morningAssembly.motto}</p>
