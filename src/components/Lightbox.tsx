@@ -1,6 +1,8 @@
 import { ChevronLeft, ChevronRight, Maximize2, Minus, Plus, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { createPortal } from "react-dom";
+
 import { Button } from "@/components/ui/button";
 
 export type LightboxItem = { src: string; caption?: string };
@@ -212,7 +214,7 @@ export function useLightbox(items: LightboxItem[]) {
             alt={activeItem.caption ?? ""}
             decoding="async"
             draggable={false}
-            className="lightbox-figure max-h-full max-w-full select-none rounded-lg object-contain shadow-premium"
+            className="max-h-full max-w-full select-none rounded-lg object-contain shadow-premium"
             style={{ transform: `translate3d(${offset.x}px, ${offset.y}px, 0) scale(${scale})`, transformOrigin: "center" }}
           />
         </div>
@@ -223,5 +225,5 @@ export function useLightbox(items: LightboxItem[]) {
     </div>
   );
 
-  return { open, view };
+  return { open, view: view && typeof document !== "undefined" ? createPortal(view, document.body) : null };
 }
