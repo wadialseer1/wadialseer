@@ -50,6 +50,8 @@
   --font-display: "Almarai", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
   --font-alt: "SchoolAlt", "IBM Plex Sans Arabic", ui-sans-serif, sans-serif;
   --color-info: var(--info);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
 
 }
 
@@ -81,6 +83,8 @@
   --destructive-foreground: oklch(0.98 0.01 250);
   /* لون مميز للتواريخ وأسماء المدراء */
   --info: oklch(0.82 0.1 195);
+  --whatsapp: oklch(0.72 0.17 150);
+  --whatsapp-foreground: oklch(0.16 0.05 160);
 
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
@@ -234,4 +238,18 @@
     opacity: 1;
     transform: none;
   }
+}
+
+@utility btn-shine {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, oklch(1 0 0 / 0.28) 50%, transparent 70%);
+    transform: translateX(120%);
+    transition: transform 0.7s ease;
+  }
+  &:hover::after { transform: translateX(-120%); }
 }
