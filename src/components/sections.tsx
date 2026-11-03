@@ -430,6 +430,7 @@ function InitiativesGrid() {
 }
 
 export function InitiativesSection() {
+  const [assemblyMore, setAssemblyMore] = useState(false);
   return (
     <section className="section-pad">
       <div className="container-site">
@@ -442,16 +443,21 @@ export function InitiativesSection() {
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><UsersRound className="h-5 w-5" /></span>
               <p className="font-bold text-primary">الطابور الصباحي</p>
             </div>
-            <h3 className="mt-3 text-2xl font-extrabold leading-snug sm:text-4xl">
+            <h3 className="mt-3 text-2xl font-extrabold leading-snug text-primary sm:text-4xl">
               {morningAssembly.title}
             </h3>
             <div className="mt-7 space-y-5 text-base leading-loose text-muted-foreground sm:text-lg">
               {morningAssembly.intro.map((text) => <p key={text}>{text}</p>)}
               <InitiativeGallery title="الطابور الصباحي" images={morningAssembly.images} columns={2} />
+              {!assemblyMore && (
+                <button type="button" onClick={() => setAssemblyMore(true)} className="rounded-full border border-primary/40 px-5 py-2 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground">اقرأ المزيد</button>
+              )}
+              {assemblyMore && <>
               <ul className="space-y-2 border-r-2 border-primary pr-5 text-foreground">
                 {morningAssembly.points.map((text) => <li key={text}>{text}</li>)}
               </ul>
               {morningAssembly.outro.map((text) => <p key={text}>{text}</p>)}
+              </>}
               <footer className="border-t border-border pt-5">
                 <p className="text-sm font-semibold text-muted-foreground">{morningAssembly.signature}</p>
                 <p className="mt-2 text-xl font-extrabold text-primary">{morningAssembly.motto}</p>
