@@ -369,6 +369,7 @@ export function InitiativesSection() {
     <section className="section-pad">
       <div className="container-site">
         <SectionTitle eyebrow="أنشطتنا" title="مبادرات مدرسية متنوعة" />
+        <WhatsappGroups />
         <div className="mt-14 space-y-10 border-r border-border pr-6 sm:pr-10">
           {initiatives.map((item, i) => (
             <Reveal key={item.title} delay={i * 90}>
@@ -388,7 +389,6 @@ export function InitiativesSection() {
             </Reveal>
           ))}
         </div>
-        <WhatsappGroups />
         <Reveal className="mt-16">
           <article className="card-premium mx-auto max-w-4xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
             <div className="flex items-center gap-3">
