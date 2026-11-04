@@ -1,7 +1,7 @@
 import { Atom, BookMarked, BookOpenText, BookText, Calculator, Computer, Download, Dumbbell, Earth, FlaskConical, Languages, Library, Palette, Search, Wrench } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { NativeSelect } from "@/components/ui/native-select";
 import { textbooks, type Textbook } from "@/data/textbooks";
 
 function cleanTitle(title: string) {
@@ -27,10 +27,9 @@ function subjectIcon(subject: string) {
 function BookFilter({ label, value, onChange, options, icon: Icon }: { label: string; value: string; onChange: (value: string) => void; options: string[]; icon: typeof Library }) {
   return <div className="min-w-0">
     <p className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><Icon className="h-4 w-4" />{label}</p>
-    <Select value={value} onValueChange={onChange} dir="rtl">
-      <SelectTrigger aria-label={label} className="h-12 border-primary/30 bg-card font-bold"><SelectValue /></SelectTrigger>
-      <SelectContent>{options.map((item) => <SelectItem key={item} value={item}>{item === "الكل" ? `جميع ${label === "المادة" ? "المواد" : "الفصول"}` : item}</SelectItem>)}</SelectContent>
-    </Select>
+    <NativeSelect value={value} onChange={(event) => onChange(event.target.value)} dir="rtl" aria-label={label}>
+      {options.map((item) => <option key={item} value={item}>{item === "الكل" ? `جميع ${label === "المادة" ? "المواد" : "الفصول"}` : item}</option>)}
+    </NativeSelect>
   </div>;
 }
 export function TextbooksSection() {

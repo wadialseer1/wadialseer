@@ -3,7 +3,7 @@ import { ArrowLeft, Atom, BriefcaseBusiness, Calculator, Computer, Dumbbell, Ear
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { NativeSelect } from "@/components/ui/native-select";
 import { Reveal } from "@/components/Reveal";
 import { useLightbox } from "@/components/Lightbox";
 import logo from "@/assets/logo.png.asset.json";
@@ -214,10 +214,9 @@ export function StaffSection() {
         <div className="mt-10 border-t border-border pt-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h3 className="text-2xl font-extrabold">الهيئة التدريسية</h3>
-            <Select value={selectedSubject} onValueChange={setSelectedSubject} dir="rtl">
-              <SelectTrigger aria-label="مادة المعلمين" className="h-12 w-full border-primary/35 bg-card font-bold sm:w-80"><SelectValue /></SelectTrigger>
-              <SelectContent>{teacherGroups.map((group) => <SelectItem key={group.subject} value={group.subject}>{group.subject} ({group.names.length})</SelectItem>)}</SelectContent>
-            </Select>
+            <NativeSelect value={selectedSubject} onChange={(event) => setSelectedSubject(event.target.value)} dir="rtl" aria-label="مادة المعلمين" className="sm:w-80">
+              {teacherGroups.map((group) => <option key={group.subject} value={group.subject}>{group.subject} ({group.names.length})</option>)}
+            </NativeSelect>
           </div>
           {selectedGroup && <article className="mt-5 rounded-lg border border-primary/35 bg-card p-5 shadow-premium sm:p-6">
             <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><TeacherIcon className="h-6 w-6" /></span><h4 className="text-xl font-bold text-primary">{selectedGroup.subject}</h4><span className="mr-auto text-sm text-muted-foreground">{selectedGroup.names.length} معلمين</span></div>
@@ -400,7 +399,7 @@ export function InitiativesSection() {
       <div className="container-site">
         <SectionTitle eyebrow="أنشطتنا" title="المبادرات المدرسية" />
         <div className="mt-10 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {[...initiatives, assemblyInitiative].map((item) => <InitiativeCard key={item.title} item={item} />)}
+          {[...initiatives, assemblyInitiative].map((item, index) => <InitiativeCard key={`${index}-${item.title}`} item={item} />)}
         </div>
       </div>
     </section>
