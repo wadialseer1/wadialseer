@@ -65,7 +65,7 @@ function Index() {
       <LocationSection />
       <PlatformsSection />
       <BtecSection />
-      <ContactSection />
+      <ContactSection showGroups={false} />
     </>
   );
 }
