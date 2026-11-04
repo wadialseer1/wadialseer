@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Atom, BriefcaseBusiness, Calculator, Computer, Dumbbell, Earth, ExternalLink, FlaskConical, Languages, Mail, MapPin, MessageCircle, Navigation, Palette, Phone, School, Target, UserRound, UsersRound, Wrench } from "lucide-react";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Reveal } from "@/components/Reveal";
 import { useLightbox } from "@/components/Lightbox";
 import logo from "@/assets/logo.png.asset.json";
@@ -105,6 +107,9 @@ export function Hero() {
               >
                 تواصل معنا
               </Link>
+              <Button asChild className="h-auto min-h-12 whitespace-normal border border-whatsapp/40 bg-whatsapp px-6 py-3 font-bold text-whatsapp-foreground hover:bg-whatsapp/90">
+                <Link to={routes.contact} hash="whatsapp-groups"><WhatsappIcon className="h-5 w-5" />قروبات واتساب لأولياء الأمور<ArrowLeft className="h-4 w-4" /></Link>
+              </Button>
             </div>
           </Reveal>
         </div>
@@ -158,14 +163,14 @@ export function AboutSection() {
 
 function PeopleRow({ people }: { people: Person[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       {people.map((person, i) => (
         <Reveal key={person.name} delay={(i % 4) * 60}>
-          <div className="card-premium h-full border-t-2 border-t-primary p-6 text-center">
+          <div className="card-premium h-full border-t-2 border-t-primary p-4 text-center">
             <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary">
               <UserRound className="h-5 w-5" />
             </span>
-            <h3 className="text-lg font-bold">{person.name}</h3>
+            <h3 className="mt-2 text-sm font-bold text-info sm:text-base">{person.name}</h3>
             <p className="mt-1 text-sm text-primary">{person.role}</p>
           </div>
         </Reveal>
@@ -189,6 +194,9 @@ function subjectIcon(subject: string) {
 }
 
 export function StaffSection() {
+  const [selectedSubject, setSelectedSubject] = useState(teacherGroups[0]?.subject ?? "");
+  const selectedGroup = teacherGroups.find((group) => group.subject === selectedSubject);
+  const TeacherIcon = subjectIcon(selectedSubject);
   return (
     <section className="section-pad">
       <div className="container-site">
@@ -203,25 +211,18 @@ export function StaffSection() {
           <PeopleRow people={administration} />
         </div>
 
-        <div className="mx-auto mt-10 h-10 w-px bg-border" />
-        <h3 className="mb-6 text-center text-2xl font-extrabold sm:text-3xl">الهيئة التدريسية</h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {teacherGroups.map((group, i) => (
-            <Reveal key={group.subject} delay={(i % 3) * 60}>
-              <article className="card-premium h-full border-t-2 border-t-primary p-6 text-center">
-                {(() => {
-                  const Icon = subjectIcon(group.subject);
-                  return <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>;
-                })()}
-                <h4 className="mt-4 text-xl font-extrabold">{group.subject}</h4>
-                <ul className="mt-3 grid gap-1 text-base text-muted-foreground">
-                  {group.names.map((name) => (
-                    <li key={name} className="border-b border-border py-2 font-semibold text-info last:border-0">{name}</li>
-                  ))}
-                </ul>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-10 border-t border-border pt-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h3 className="text-2xl font-extrabold">الهيئة التدريسية</h3>
+            <Select value={selectedSubject} onValueChange={setSelectedSubject} dir="rtl">
+              <SelectTrigger aria-label="مادة المعلمين" className="h-12 w-full border-primary/35 bg-card font-bold sm:w-80"><SelectValue /></SelectTrigger>
+              <SelectContent>{teacherGroups.map((group) => <SelectItem key={group.subject} value={group.subject}>{group.subject} ({group.names.length})</SelectItem>)}</SelectContent>
+            </Select>
+          </div>
+          {selectedGroup && <article className="mt-5 rounded-lg border border-primary/35 bg-card p-5 shadow-premium sm:p-6">
+            <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><TeacherIcon className="h-6 w-6" /></span><h4 className="text-xl font-bold text-primary">{selectedGroup.subject}</h4><span className="mr-auto text-sm text-muted-foreground">{selectedGroup.names.length} معلمين</span></div>
+            <ul className="mt-5 grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">{selectedGroup.names.map((name) => <li key={name} className="flex items-center gap-2 border-t border-border py-4 font-semibold text-info"><UserRound className="h-4 w-4 shrink-0 text-primary" />{name}</li>)}</ul>
+          </article>}
         </div>
       </div>
     </section>
@@ -260,31 +261,6 @@ export function BtecSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function InitiativeGallery({ title, images, columns = 4 }: { title: string; images: string[]; columns?: 2 | 4 }) {
-  const { open, view } = useLightbox(images.map((src) => ({ src, caption: title })));
-
-  return (
-    <div className={`mt-6 grid grid-cols-2 gap-3 ${columns === 4 ? "sm:grid-cols-4" : ""}`}>
-      {images.map((src, index) => (
-        <button
-          key={src}
-          type="button"
-          onClick={() => open(index)}
-          className="overflow-hidden rounded-xl border border-border transition-opacity hover:opacity-85"
-        >
-          <img
-            src={src}
-            alt={`${title} - صورة ${index + 1}`}
-            className="aspect-square w-full bg-secondary object-cover"
-            loading="lazy"
-          />
-        </button>
-      ))}
-      {view}
-    </div>
   );
 }
 
@@ -331,10 +307,11 @@ function WhatsappGroups() {
   ];
   const [active, setActive] = useState("am");
   const [showText, setShowText] = useState(false);
-  const period = periods.find((p) => p.key === active) ?? periods[0]!;
+  const period = active === "pm" ? periods[1] : periods[0];
+  if (!period) return null;
   return (
-    <Reveal className="mt-10">
-      <article className="card-premium mx-auto max-w-5xl border-t-4 border-t-whatsapp p-5 shadow-premium sm:p-8">
+    <div id="whatsapp-groups" className="mt-10 scroll-mt-24 border-y border-whatsapp/30 py-8">
+      <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-whatsapp text-whatsapp-foreground"><WhatsappIcon className="h-7 w-7" /></span>
@@ -345,34 +322,34 @@ function WhatsappGroups() {
           </div>
           <div role="tablist" className="flex rounded-full border border-border bg-secondary/60 p-1">
             {periods.map((p) => (
-              <button key={p.key} role="tab" aria-selected={active === p.key} type="button" onClick={() => setActive(p.key)}
+              <Button key={p.key} variant="ghost" role="tab" aria-selected={active === p.key} type="button" onClick={() => setActive(p.key)}
                 className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${active === p.key ? "bg-primary text-primary-foreground shadow-gold" : "text-muted-foreground hover:text-foreground"}`}>
                 {p.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
         <div className="mt-4 text-sm leading-loose text-muted-foreground sm:text-base">
           <p>{period.intro[1]}</p>
           {showText && period.intro.filter((_, i) => i !== 1).map((t) => <p key={t} className="mt-2">{t}</p>)}
-          <button type="button" onClick={() => setShowText((v) => !v)} className="mt-1 text-sm font-bold text-primary hover:underline">{showText ? "إخفاء" : "قراءة الإعلان كاملًا"}</button>
+          <Button variant="link" type="button" onClick={() => setShowText((v) => !v)} className="mt-1 text-sm font-bold text-primary hover:underline">{showText ? "إخفاء" : "قراءة الإعلان كاملًا"}</Button>
         </div>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {period.groups.map((g) => (
-            <div key={g.grade} className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-secondary/40 p-3">
+            <div key={g.grade} className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card p-4">
               <span className="ml-1 min-w-24 text-sm font-extrabold text-info">الصف {g.grade}</span>
               {g.sections.map((sec) => (
-                <a key={sec.url} href={sec.url} target="_blank" rel="noopener noreferrer" aria-label={`انضم إلى مجموعة واتساب ${sec.name}`}
-                  className="btn-shine inline-flex h-10 items-center gap-1.5 rounded-full bg-whatsapp pr-3 pl-4 text-sm font-extrabold text-whatsapp-foreground shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-gold">
+                <Button asChild key={sec.url} className="h-11 border border-whatsapp/40 bg-whatsapp px-4 font-bold text-whatsapp-foreground shadow-sm hover:bg-whatsapp/90"><a href={sec.url} target="_blank" rel="noopener noreferrer" aria-label={`انضم إلى مجموعة واتساب ${sec.name}`}
+                  >
                   <WhatsappIcon className="h-4 w-4" />
                   {sec.name.replace(`${g.grade} `, "")}
-                </a>
+                </a></Button>
               ))}
             </div>
           ))}
         </div>
-      </article>
-    </Reveal>
+      </div>
+    </div>
   );
 }
 
@@ -383,12 +360,12 @@ function InitiativeCard({ item }: { item: (typeof initiatives)[number] }) {
   return (
     <article className="card-premium flex h-full flex-col overflow-hidden">
       {cover && (
-        <button type="button" onClick={() => open(0)} className="relative block aspect-[16/10] overflow-hidden bg-secondary">
+        <Button variant="ghost" type="button" aria-label={`صور ${item.title}`} onClick={() => open(0)} className="relative block h-auto aspect-[16/10] rounded-none p-0 overflow-hidden bg-secondary">
           <img src={cover} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
           {item.images.length > 1 && (
             <span className="absolute bottom-3 left-3 rounded-full bg-navy-deep/85 px-3 py-1 text-xs font-bold text-primary">{item.images.length} صور</span>
           )}
-        </button>
+        </Button>
       )}
       <div className="flex flex-1 flex-col p-5">
         {item.date && <p className="w-fit rounded-full border border-info/30 bg-info/10 px-3 py-1 text-xs font-bold text-info">{item.date}</p>}
@@ -397,11 +374,11 @@ function InitiativeCard({ item }: { item: (typeof initiatives)[number] }) {
           {item.paragraphs.map((t, k) => <p key={k}><HighlightNames text={t} /></p>)}
         </div>
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
-          <button type="button" onClick={() => setOpenText((v) => !v)} className="rounded-full border border-primary/40 px-4 py-1.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">
+          <Button variant="outline" aria-expanded={openText} type="button" onClick={() => setOpenText((v) => !v)} className="rounded-full border border-primary/40 px-4 py-1.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">
             {openText ? "عرض أقل" : "اقرأ المزيد"}
-          </button>
+          </Button>
           {item.images.length > 1 && (
-            <button type="button" onClick={() => open(0)} className="rounded-full bg-secondary px-4 py-1.5 text-sm font-bold text-foreground hover:bg-accent">معرض الصور</button>
+            <Button variant="secondary" type="button" onClick={() => open(0)} className="rounded-md bg-secondary px-4 py-1.5 text-sm font-bold text-foreground hover:bg-accent">معرض الصور</Button>
           )}
         </div>
       </div>
@@ -410,61 +387,21 @@ function InitiativeCard({ item }: { item: (typeof initiatives)[number] }) {
   );
 }
 
-function InitiativesGrid() {
-  const perPage = 6;
-  const [count, setCount] = useState(perPage);
-  return (
-    <div className="mt-12">
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {initiatives.slice(0, count).map((item) => <InitiativeCard key={item.title} item={item} />)}
-      </div>
-      {count < initiatives.length && (
-        <div className="mt-8 text-center">
-          <button type="button" onClick={() => setCount((c) => c + perPage)} className="btn-shine rounded-full bg-primary px-8 py-3 font-extrabold text-primary-foreground shadow-gold transition-transform hover:-translate-y-0.5">
-            عرض مبادرات أخرى ({initiatives.length - count})
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+const assemblyInitiative = {
+  title: morningAssembly.title,
+  date: "",
+  paragraphs: [...morningAssembly.intro, ...morningAssembly.points, ...morningAssembly.outro, morningAssembly.signature, morningAssembly.motto],
+  images: morningAssembly.images,
+};
 
 export function InitiativesSection() {
-  const [assemblyMore, setAssemblyMore] = useState(false);
   return (
     <section className="section-pad">
       <div className="container-site">
-        <SectionTitle eyebrow="أنشطتنا" title="مبادرات مدرسية متنوعة" />
-        <WhatsappGroups />
-        <InitiativesGrid />
-        <Reveal className="mt-16">
-          <article className="card-premium mx-auto max-w-4xl border-t-4 border-t-primary p-6 shadow-premium sm:p-10">
-            <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><UsersRound className="h-5 w-5" /></span>
-              <p className="font-bold text-primary">الطابور الصباحي</p>
-            </div>
-            <h3 className="mt-3 text-2xl font-extrabold leading-snug text-primary sm:text-4xl">
-              {morningAssembly.title}
-            </h3>
-            <div className="mt-7 space-y-5 text-base leading-loose text-muted-foreground sm:text-lg">
-              {morningAssembly.intro.map((text) => <p key={text}>{text}</p>)}
-              <InitiativeGallery title="الطابور الصباحي" images={morningAssembly.images} columns={2} />
-              {!assemblyMore && (
-                <button type="button" onClick={() => setAssemblyMore(true)} className="rounded-full border border-primary/40 px-5 py-2 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground">اقرأ المزيد</button>
-              )}
-              {assemblyMore && <>
-              <ul className="space-y-2 border-r-2 border-primary pr-5 text-foreground">
-                {morningAssembly.points.map((text) => <li key={text}>{text}</li>)}
-              </ul>
-              {morningAssembly.outro.map((text) => <p key={text}>{text}</p>)}
-              </>}
-              <footer className="border-t border-border pt-5">
-                <p className="text-sm font-semibold text-muted-foreground">{morningAssembly.signature}</p>
-                <p className="mt-2 text-xl font-extrabold text-primary">{morningAssembly.motto}</p>
-              </footer>
-            </div>
-          </article>
-        </Reveal>
+        <SectionTitle eyebrow="أنشطتنا" title="المبادرات المدرسية" />
+        <div className="mt-10 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {[...initiatives, assemblyInitiative].map((item) => <InitiativeCard key={item.title} item={item} />)}
+        </div>
       </div>
     </section>
   );
@@ -572,11 +509,12 @@ export function PlatformsSection() {
   );
 }
 
-export function ContactSection() {
+export function ContactSection({ showGroups = true }: { showGroups?: boolean }) {
   return (
     <section className="section-pad border-t border-border bg-card/40" id="contact">
       <div className="container-site">
         <SectionTitle eyebrow="تواصل معنا" title="نحن هنا للإجابة على استفساراتكم" />
+        {showGroups && <WhatsappGroups />}
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <Reveal>
