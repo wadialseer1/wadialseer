@@ -53,7 +53,7 @@ export function TextbooksSection() {
   return <section className="section-pad"><div className="container-site">
     <p className="font-bold text-primary">مكتبة الطالب</p>
     <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">الكتب المدرسية</h2>
-    <div className="mt-8 grid gap-4 border-y border-primary/25 py-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-8 grid grid-cols-2 gap-4 border-y border-primary/25 py-6 lg:grid-cols-4">
       <BookFilter label="الصف الدراسي" value={grade} onChange={chooseGrade} options={grades} icon={BookOpenText} />
       <BookFilter label="المادة" value={subject} onChange={setSubject} options={["الكل", ...subjects]} icon={Library} />
       <BookFilter label="الفصل" value={semester} onChange={setSemester} options={["الكل", "الفصل الأول", "الفصل الثاني", "كتب إضافية"]} icon={BookMarked} />
