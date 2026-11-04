@@ -1,152 +1,93 @@
 import { Atom, BookMarked, BookOpenText, BookText, Calculator, Computer, Download, Dumbbell, Earth, FlaskConical, Languages, Library, Palette, Search, Wrench } from "lucide-react";
 import { useMemo, useState } from "react";
-
 import { Button } from "@/components/ui/button";
+import { NativeSelect } from "@/components/ui/native-select";
 import { textbooks, type Textbook } from "@/data/textbooks";
-
-type SubjectGroup = { subject: string; books: Textbook[] };
-type SemesterGroup = { label: string; books: Textbook[] };
 
 function cleanTitle(title: string) {
   return title.replace(/^\d+\s*/, "").replace(/\s*-\s*الفصل (الأول|الثاني)$/, "");
 }
-
 function semesterOf(title: string) {
   if (title.includes("الفصل الثاني")) return "الفصل الثاني";
   if (title.includes("الفصل الأول")) return "الفصل الأول";
   return "كتب إضافية";
 }
-
-function groupSemesters(books: Textbook[]): SemesterGroup[] {
-  const labels = ["الفصل الأول", "الفصل الثاني", "كتب إضافية"];
-  return labels
-    .map((label) => ({ label, books: books.filter((book) => semesterOf(book.title) === label) }))
-    .filter((group) => group.books.length > 0);
-}
-
 function subjectIcon(subject: string) {
   if (/رياضيات/.test(subject)) return Calculator;
-  if (/علوم|فيزياء|أحياء/.test(subject)) return Atom;
   if (/كيمياء/.test(subject)) return FlaskConical;
+  if (/اجتماعيات|جغرافيا|تاريخ|أرض/.test(subject)) return Earth;
+  if (/علوم|فيزياء|أحياء/.test(subject)) return Atom;
   if (/حاسوب/.test(subject)) return Computer;
   if (/عربية|إنجليزية/.test(subject)) return Languages;
-  if (/اجتماعيات|جغرافيا|تاريخ|أرض/.test(subject)) return Earth;
   if (/رياضية/.test(subject)) return Dumbbell;
   if (/فنية/.test(subject)) return Palette;
   if (/مهنية/.test(subject)) return Wrench;
   return BookOpenText;
 }
-
+function BookFilter({ label, value, onChange, options, icon: Icon }: { label: string; value: string; onChange: (value: string) => void; options: string[]; icon: typeof Library }) {
+  return <div className="min-w-0">
+    <p className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><Icon className="h-4 w-4" />{label}</p>
+    <NativeSelect value={value} onChange={(event) => onChange(event.target.value)} dir="rtl" aria-label={label}>
+      {options.map((item) => <option key={item} value={item}>{item === "الكل" ? `جميع ${label === "المادة" ? "المواد" : "الفصول"}` : item}</option>)}
+    </NativeSelect>
+  </div>;
+}
 export function TextbooksSection() {
   const grades = useMemo(() => [...new Set(textbooks.map((book) => book.grade))], []);
   const [grade, setGrade] = useState(grades[0] ?? "");
   const [subject, setSubject] = useState("الكل");
+  const [semester, setSemester] = useState("الكل");
   const [query, setQuery] = useState("");
-  const subjects = useMemo(
-    () => [...new Set(textbooks.filter((item) => item.grade === grade).map((item) => item.subject))],
-    [grade],
-  );
+  const subjects = useMemo(() => [...new Set(textbooks.filter((book) => book.grade === grade).map((book) => book.subject))], [grade]);
   const groups = useMemo(() => {
     const grouped = new Map<string, Textbook[]>();
-    textbooks
-      .filter((item) => item.grade === grade)
-      .filter((item) => subject === "الكل" || item.subject === subject)
-      .filter((item) => `${item.subject} ${item.title}`.includes(query.trim()))
-      .forEach((item) => grouped.set(item.subject, [...(grouped.get(item.subject) ?? []), item]));
-    return [...grouped].map(([groupSubject, books]): SubjectGroup => ({ subject: groupSubject, books }));
-  }, [grade, query, subject]);
-
-  const chooseGrade = (nextGrade: string) => {
-    setGrade(nextGrade);
-    setSubject("الكل");
-    setQuery("");
-  };
-
-  return (
-    <section className="section-pad">
-      <div className="container-site">
-        <div className="max-w-3xl">
-          <p className="font-bold text-primary">مكتبة الطالب</p>
-          <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">الكتب المدرسية</h2>
-          <p className="mt-3 text-muted-foreground">اختر الصف والمادة، ثم نزّل كتاب الطالب أو الأنشطة للفصل المطلوب مباشرة إلى جهازك.</p>
-        </div>
-
-        <div className="sticky top-18 z-20 mt-8 space-y-5 rounded-lg border border-primary/35 bg-background/95 p-4 shadow-premium backdrop-blur-md sm:p-6">
-          <div>
-            <div className="mb-3 flex items-center gap-2"><BookOpenText className="h-5 w-5 text-primary" /><p className="text-sm font-bold text-foreground">اختر الصف</p></div>
-            <div className="flex snap-x gap-2 overflow-x-auto pb-2">
-              {grades.map((item) => (
-                <Button key={item} type="button" variant={item === grade ? "default" : "secondary"} onClick={() => chooseGrade(item)} className="h-11 shrink-0 snap-start rounded-md border border-primary/25 px-5 font-bold shadow-sm">{item}</Button>
-              ))}
-            </div>
+    textbooks.filter((book) => book.grade === grade)
+      .filter((book) => subject === "الكل" || book.subject === subject)
+      .filter((book) => semester === "الكل" || semesterOf(book.title) === semester)
+      .filter((book) => `${book.subject} ${book.title}`.includes(query.trim()))
+      .forEach((book) => grouped.set(book.subject, [...(grouped.get(book.subject) ?? []), book]));
+    return [...grouped].map(([subject, books]) => ({ subject, books }));
+  }, [grade, subject, semester, query]);
+  const chooseGrade = (value: string) => { setGrade(value); setSubject("الكل"); setSemester("الكل"); setQuery(""); };
+  return <section className="section-pad"><div className="container-site">
+    <p className="font-bold text-primary">مكتبة الطالب</p>
+    <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">الكتب المدرسية</h2>
+    <div className="mt-8 grid grid-cols-2 gap-4 border-y border-primary/25 py-6 lg:grid-cols-4">
+      <BookFilter label="الصف الدراسي" value={grade} onChange={chooseGrade} options={grades} icon={BookOpenText} />
+      <BookFilter label="المادة" value={subject} onChange={setSubject} options={["الكل", ...subjects]} icon={Library} />
+      <BookFilter label="الفصل" value={semester} onChange={setSemester} options={["الكل", "الفصل الأول", "الفصل الثاني", "كتب إضافية"]} icon={BookMarked} />
+      <label className="min-w-0"><span className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><Search className="h-4 w-4" />البحث في الكتب</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="اسم المادة أو الكتاب" className="h-12 w-full rounded-md border border-input bg-card px-4 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" /></label>
+    </div>
+    <p className="mt-6 text-sm font-semibold text-muted-foreground"><span className="text-info">{grade}</span> — {subject === "الكل" ? "جميع المواد" : subject} <span className="mr-2 text-primary">{groups.reduce((count, group) => count + group.books.length, 0)} كتاب</span></p>
+    <div className="mt-5 grid items-start gap-6 lg:grid-cols-2">
+      {groups.map((group) => {
+        const Icon = subjectIcon(group.subject);
+        return <article key={group.subject} className="overflow-hidden rounded-lg border border-primary/30 bg-card shadow-premium">
+          <header className="flex items-center gap-3 border-b border-primary/25 bg-secondary/40 p-5">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-6 w-6" /></span>
+            <h3 className="min-w-0 text-xl font-extrabold text-primary">{group.subject}</h3>
+          </header>
+          <div className="space-y-5 p-4 sm:p-5">
+            {["الفصل الأول", "الفصل الثاني", "كتب إضافية"].map((label) => {
+              const books = group.books.filter((book) => semesterOf(book.title) === label);
+              if (!books.length) return null;
+              return <section key={label} aria-label={`${group.subject} - ${label}`}>
+                <h4 className="border-b border-border pb-2 text-sm font-extrabold text-info">{label}</h4>
+                <div className="grid gap-x-5 sm:grid-cols-2">{books.map((book) => {
+                  const BookIcon = /الأنشطة|التمارين/.test(book.title) ? BookMarked : BookText;
+                  return <div key={book.file} className="flex min-w-0 flex-col gap-4 py-4">
+                    <p className="flex items-center gap-2 font-bold"><BookIcon className="h-5 w-5 shrink-0 text-primary" />{cleanTitle(book.title)}</p>
+                    <Button asChild className="mt-auto h-12 w-full justify-between border border-primary/30 px-4 font-bold shadow-gold">
+                      <a href={`https://www.minhaji.net/download/${book.file}`} download aria-label={`تنزيل ${cleanTitle(book.title)} — ${group.subject} — ${label}`}><span className="flex items-center gap-2"><Download className="h-5 w-5" />تنزيل الكتاب</span><span className="border-r border-primary-foreground/25 pr-3 text-xs">PDF</span></a>
+                    </Button>
+                  </div>;
+                })}</div>
+              </section>;
+            })}
           </div>
-          <div className="border-t border-border pt-4">
-            <div className="mb-3 flex items-center gap-2"><Library className="h-5 w-5 text-primary" /><p className="text-sm font-bold text-foreground">اختر المادة</p></div>
-            <div className="flex snap-x gap-2 overflow-x-auto pb-2">
-              {["الكل", ...subjects].map((item) => (
-                <Button key={item} type="button" variant={item === subject ? "default" : "secondary"} onClick={() => setSubject(item)} className="h-10 shrink-0 snap-start rounded-md border border-primary/25 px-4 font-bold shadow-sm">{item === "الكل" ? "جميع المواد" : item}</Button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5">
-          <label className="relative block min-w-0">
-            <span className="sr-only">البحث في الكتب</span>
-            <Search className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ابحث عن مادة أو كتاب" className="h-12 w-full rounded-md border border-input bg-card pr-12 pl-4 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary" />
-          </label>
-        </div>
-
-        <p className="mt-6 text-sm font-semibold text-muted-foreground">يعرض الآن: <span className="text-primary">{grade}</span>{subject !== "الكل" ? ` — ${subject}` : " — جميع المواد"}</p>
-
-        <div className="mt-5 grid items-start gap-6 xl:grid-cols-2">
-          {groups.map((group) => (
-            <article key={group.subject} className="overflow-hidden rounded-lg border border-primary/40 bg-card shadow-premium">
-              <header className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 border-b border-primary/30 bg-navy p-5 text-foreground">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-gold text-primary-foreground">
-                  {(() => { const Icon = subjectIcon(group.subject); return <Icon className="h-6 w-6" />; })()}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="truncate text-xl font-extrabold">{group.subject}</h3>
-                  <p className="text-sm text-foreground/75">{group.books.length} {group.books.length === 1 ? "كتاب" : "كتب"} مرتبة حسب الفصل</p>
-                </div>
-              </header>
-              <div className="space-y-5 p-4 sm:p-5">
-                {groupSemesters(group.books).map((semester) => (
-                  <section key={semester.label} aria-label={`${group.subject} - ${semester.label}`}>
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-primary" />
-                      <h4 className="text-sm font-extrabold text-primary">{semester.label}</h4>
-                    </div>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {semester.books.map((item) => {
-                        const isActivity = /الأنشطة|التمارين/.test(item.title);
-                        const Icon = isActivity ? BookMarked : BookText;
-                        return (
-                          <div key={item.file} className="flex min-w-0 flex-col gap-4 rounded-md border border-primary/30 bg-secondary/60 p-4 shadow-sm transition-transform hover:-translate-y-0.5">
-                            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
-                              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>
-                              <p className="min-w-0 font-bold text-foreground">{cleanTitle(item.title)}</p>
-                            </div>
-                            <a href={`https://www.minhaji.net/download/${item.file}`} download
-                              className="btn-shine group mt-auto inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-gold transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                              <Download className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
-                              <span>تنزيل الكتاب</span>
-                              <span className="rounded-full bg-primary-foreground/15 px-2 py-0.5 text-[11px]">PDF</span>
-                            </a>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-    </section>
-  );
+        </article>;
+      })}
+    </div>
+    {groups.length === 0 && <p role="status" className="py-12 text-center text-muted-foreground">لا توجد كتب مطابقة للبحث.</p>}
+  </div></section>;
 }

@@ -4,7 +4,7 @@ import { ContactSection } from "@/components/sections";
 
 const title = "تواصل معنا — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "تواصل مع مدرسة وادي السير الأساسية للبنين هاتفياً أو عبر البريد الإلكتروني أو صفحة المدرسة الرسمية على فيسبوك.";
+  "تواصل مع مدرسة وادي السير الأساسية للبنين وانضم إلى قروبات واتساب الصفوف والشعب للفترتين الصباحية والمسائية.";
 const url = "https://abusus.lovable.app/7";
 
 export const Route = createFileRoute("/7")({

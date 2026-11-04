@@ -4,7 +4,7 @@ import { InitiativesSection } from "@/components/sections";
 
 const title = "المبادرات المدرسية — مدرسة وادي السير الأساسية للبنين";
 const description =
-  "مبادرات وأنشطة مدرسة وادي السير الأساسية للبنين: مبادرة لمدرستي أنتمي.";
+  "جميع المبادرات والأنشطة في مدرسة وادي السير الأساسية للبنين، مع الصور والطابور الصباحي والإنجازات الرياضية.";
 const url = "https://abusus.lovable.app/4";
 
 export const Route = createFileRoute("/4")({
