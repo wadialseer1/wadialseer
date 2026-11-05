@@ -219,8 +219,30 @@ export function useLightbox(items: LightboxItem[]) {
           />
         </div>
       </div>
-      <p className="shrink-0 px-4 py-3 text-center text-xs text-muted-foreground">
-        اسحب للتنقل · قرّب بإصبعين أو بعجلة الفأرة · استخدم الأسهم من لوحة المفاتيح
+      {items.length > 1 && (
+        <div className="shrink-0 px-3 pt-2" onClick={(event) => event.stopPropagation()}>
+          <div className="mx-auto flex max-w-3xl snap-x gap-2 overflow-x-auto pb-2 [scrollbar-width:thin]">
+            {items.map((item, i) => (
+              <button
+                key={item.src + i}
+                type="button"
+                aria-label={`الصورة ${i + 1}`}
+                aria-current={i === index}
+                ref={(el) => { if (el && i === index) el.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }); }}
+                onClick={() => { setIndex(i); resetView(); }}
+                className={`h-14 w-20 shrink-0 snap-center overflow-hidden rounded-md border-2 transition-all duration-200 sm:h-16 sm:w-24 ${i === index ? "border-primary opacity-100 shadow-gold" : "border-transparent opacity-50 hover:opacity-90"}`}
+              >
+                <img src={item.src} alt="" loading="lazy" draggable={false} className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+          <div className="flex justify-center gap-1.5 pb-1">
+            {items.map((item, i) => <span key={item.src + i + "d"} className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40"}`} />)}
+          </div>
+        </div>
+      )}
+      <p className="shrink-0 px-4 py-2 text-center text-xs text-muted-foreground">
+        {index !== null && `${index + 1} / ${items.length} · `}اسحب للتنقل · قرّب بإصبعين أو بعجلة الفأرة
       </p>
     </div>
   );

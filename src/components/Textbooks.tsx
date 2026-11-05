@@ -73,12 +73,17 @@ export function TextbooksSection() {
               if (!books.length) return null;
               return <section key={label} aria-label={`${group.subject} - ${label}`}>
                 <h4 className="border-b border-border pb-2 text-sm font-extrabold text-info">{label}</h4>
-                <div className="grid gap-x-5 sm:grid-cols-2">{books.map((book) => {
-                  const BookIcon = /الأنشطة|التمارين/.test(book.title) ? BookMarked : BookText;
-                  return <div key={book.file} className="flex min-w-0 flex-col gap-4 py-4">
-                    <p className="flex items-center gap-2 font-bold"><BookIcon className="h-5 w-5 shrink-0 text-primary" />{cleanTitle(book.title)}</p>
-                    <Button asChild className="mt-auto h-12 w-full justify-between border border-primary/30 px-4 font-bold shadow-gold">
-                      <a href={`https://www.minhaji.net/download/${book.file}`} download aria-label={`تنزيل ${cleanTitle(book.title)} — ${group.subject} — ${label}`}><span className="flex items-center gap-2"><Download className="h-5 w-5" />تنزيل الكتاب</span><span className="border-r border-primary-foreground/25 pr-3 text-xs">PDF</span></a>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">{books.map((book) => {
+                  const activity = /الأنشطة|التمارين/.test(book.title);
+                  const BookIcon = activity ? BookMarked : BookText;
+                  return <div key={book.file} className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/30 p-3 transition-colors hover:border-primary/50">
+                    <span className={`grid h-12 w-10 shrink-0 place-items-center rounded-sm border-r-4 ${activity ? "border-info bg-info/15 text-info" : "border-primary bg-primary/15 text-primary"}`}><BookIcon className="h-5 w-5" /></span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-bold">{cleanTitle(book.title)}</p>
+                      <p className="text-xs text-muted-foreground">PDF · {activity ? "كتاب الأنشطة" : "كتاب الطالب"}</p>
+                    </div>
+                    <Button asChild size="icon" className="h-10 w-10 shrink-0 rounded-full shadow-gold">
+                      <a href={`https://www.minhaji.net/download/${book.file}`} download title="تنزيل" aria-label={`تنزيل ${cleanTitle(book.title)} — ${group.subject} — ${label}`}><Download className="h-5 w-5" /></a>
                     </Button>
                   </div>;
                 })}</div>
