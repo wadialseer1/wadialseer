@@ -211,21 +211,19 @@ export function StaffSection() {
         <div className="mt-10 border-t border-border pt-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h3 className="text-2xl font-extrabold">الهيئة التدريسية</h3>
-            <span className="rounded-md bg-primary/15 px-3 py-1 text-sm font-bold text-primary">{teacherGroups.reduce((n, g) => n + g.names.length, 0)} معلمًا · {teacherGroups.length} مادة</span>
           </div>
-          <div className="mt-6 columns-1 gap-4 sm:columns-2 lg:columns-3">
-            {teacherGroups.map((group) => {
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {teacherGroups.flatMap((group) => {
               const Icon = subjectIcon(group.subject);
-              return <article key={group.subject} className="mb-4 break-inside-avoid overflow-hidden rounded-lg border border-primary/30 bg-card shadow-premium">
-                <header className="flex items-center gap-3 border-b border-primary/25 bg-secondary/50 px-4 py-3">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground"><Icon className="h-5 w-5" /></span>
-                  <h4 className="min-w-0 flex-1 truncate font-extrabold text-primary">{group.subject}</h4>
-                  <span className="shrink-0 rounded bg-primary/15 px-2 py-0.5 text-xs font-bold text-primary">{group.names.length}</span>
-                </header>
-                <ol className="divide-y divide-border px-4">
-                  {group.names.map((name, i) => <li key={name} className="flex items-center gap-3 py-2.5 text-sm font-semibold text-info"><span className="w-5 shrink-0 text-xs text-muted-foreground">{i + 1}</span>{name}</li>)}
-                </ol>
-              </article>;
+              return group.names.map((name, i) => (
+                <Reveal key={group.subject + name} delay={(i % 5) * 50}>
+                  <div className="card-premium h-full border-t-2 border-t-primary p-4 text-center">
+                    <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>
+                    <h4 className="mt-2 text-sm font-bold text-info sm:text-base">{name}</h4>
+                    <p className="mt-1 text-sm text-primary">معلم {group.subject}</p>
+                  </div>
+                </Reveal>
+              ));
             })}
           </div>
         </div>
