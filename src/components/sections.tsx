@@ -212,18 +212,20 @@ export function StaffSection() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h3 className="text-2xl font-extrabold">الهيئة التدريسية</h3>
           </div>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            {teacherGroups.flatMap((group) => {
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {teacherGroups.map((group, gi) => {
               const Icon = subjectIcon(group.subject);
-              return group.names.map((name, i) => (
-                <Reveal key={group.subject + name} delay={(i % 5) * 50}>
-                  <div className="card-premium h-full border-t-2 border-t-primary p-4 text-center">
+              return (
+                <Reveal key={group.subject} delay={(gi % 3) * 60}>
+                  <div className="card-premium h-full border-t-2 border-t-primary p-5 text-center">
                     <span className="mx-auto grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>
-                    <h4 className="mt-2 text-sm font-bold text-info sm:text-base">{name}</h4>
-                    <p className="mt-1 text-sm text-primary">معلم {group.subject}</p>
+                    <h4 className="mt-2 text-lg font-extrabold text-primary">{group.subject}</h4>
+                    <ul className="mt-3 space-y-1.5">
+                      {group.names.map((name) => <li key={name} className="text-sm font-bold text-info sm:text-base">{name}</li>)}
+                    </ul>
                   </div>
                 </Reveal>
-              ));
+              );
             })}
           </div>
         </div>
