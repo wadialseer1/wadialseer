@@ -12,5 +12,5 @@
 - Keep textbook source records flat and group them by grade, subject, and semester; each PDF is download-only from its canonical source.
 - Mount site-wide transient controls, such as scroll-to-top, in the root layout so they work consistently on every route.
 - Shared ContactSection accepts a groups visibility flag so the dedicated contact page owns group browsing while the homepage provides a direct link.
-- Show every teacher as an individual card matching the administration cards, labelled with their subject, so both rosters share one visual language.
+- Show all teachers grouped one card per subject, styled like the administration cards, so the full roster stays visible and consistent.
 - Use the shared native-select control for textbook and staff filters to avoid third-party select context dependencies and retain platform-native mobile picking.
