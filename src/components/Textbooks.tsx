@@ -62,10 +62,14 @@ export function TextbooksSection() {
     <div className="mt-5 grid items-start gap-6 lg:grid-cols-2">
       {groups.map((group) => {
         const Icon = subjectIcon(group.subject);
-        return <article key={group.subject} className="overflow-hidden rounded-lg border border-primary/30 bg-card shadow-premium">
-          <header className="flex items-center gap-3 border-b border-primary/25 bg-secondary/40 p-5">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-primary/15 text-primary"><Icon className="h-6 w-6" /></span>
-            <h3 className="min-w-0 text-xl font-extrabold text-primary">{group.subject}</h3>
+        return <article key={group.subject} className="group overflow-hidden rounded-xl border border-primary/30 bg-card shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-gold">
+          <header className="relative flex items-center gap-3 overflow-hidden border-b border-primary/25 bg-gradient-to-l from-primary/25 via-secondary/60 to-info/15 p-5">
+            <Icon aria-hidden className="pointer-events-none absolute -left-4 -top-4 h-28 w-28 text-primary/10 transition-transform duration-500 group-hover:rotate-12" />
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground shadow-gold transition-transform duration-300 group-hover:scale-110"><Icon className="h-6 w-6" /></span>
+            <div className="min-w-0">
+              <h3 className="text-xl font-extrabold text-primary">{group.subject}</h3>
+              <p className="text-xs font-semibold text-info">{grade} · {group.books.length} كتاب</p>
+            </div>
           </header>
           <div className="space-y-5 p-4 sm:p-5">
             {["الفصل الأول", "الفصل الثاني", "كتب إضافية"].map((label) => {
