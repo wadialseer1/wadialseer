@@ -194,9 +194,6 @@ function subjectIcon(subject: string) {
 }
 
 export function StaffSection() {
-  const [selectedSubject, setSelectedSubject] = useState(teacherGroups[0]?.subject ?? "");
-  const selectedGroup = teacherGroups.find((group) => group.subject === selectedSubject);
-  const TeacherIcon = subjectIcon(selectedSubject);
   return (
     <section className="section-pad">
       <div className="container-site">
@@ -214,14 +211,23 @@ export function StaffSection() {
         <div className="mt-10 border-t border-border pt-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h3 className="text-2xl font-extrabold">الهيئة التدريسية</h3>
-            <NativeSelect value={selectedSubject} onChange={(event) => setSelectedSubject(event.target.value)} dir="rtl" aria-label="مادة المعلمين" className="sm:w-80">
-              {teacherGroups.map((group) => <option key={group.subject} value={group.subject}>{group.subject} ({group.names.length})</option>)}
-            </NativeSelect>
+            <span className="rounded-md bg-primary/15 px-3 py-1 text-sm font-bold text-primary">{teacherGroups.reduce((n, g) => n + g.names.length, 0)} معلمًا · {teacherGroups.length} مادة</span>
           </div>
-          {selectedGroup && <article className="mt-5 rounded-lg border border-primary/35 bg-card p-5 shadow-premium sm:p-6">
-            <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-md bg-primary/15 text-primary"><TeacherIcon className="h-6 w-6" /></span><h4 className="text-xl font-bold text-primary">{selectedGroup.subject}</h4><span className="mr-auto text-sm text-muted-foreground">{selectedGroup.names.length} معلمين</span></div>
-            <ul className="mt-5 grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">{selectedGroup.names.map((name) => <li key={name} className="flex items-center gap-2 border-t border-border py-4 font-semibold text-info"><UserRound className="h-4 w-4 shrink-0 text-primary" />{name}</li>)}</ul>
-          </article>}
+          <div className="mt-6 columns-1 gap-4 sm:columns-2 lg:columns-3">
+            {teacherGroups.map((group) => {
+              const Icon = subjectIcon(group.subject);
+              return <article key={group.subject} className="mb-4 break-inside-avoid overflow-hidden rounded-lg border border-primary/30 bg-card shadow-premium">
+                <header className="flex items-center gap-3 border-b border-primary/25 bg-secondary/50 px-4 py-3">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground"><Icon className="h-5 w-5" /></span>
+                  <h4 className="min-w-0 flex-1 truncate font-extrabold text-primary">{group.subject}</h4>
+                  <span className="shrink-0 rounded bg-primary/15 px-2 py-0.5 text-xs font-bold text-primary">{group.names.length}</span>
+                </header>
+                <ol className="divide-y divide-border px-4">
+                  {group.names.map((name, i) => <li key={name} className="flex items-center gap-3 py-2.5 text-sm font-semibold text-info"><span className="w-5 shrink-0 text-xs text-muted-foreground">{i + 1}</span>{name}</li>)}
+                </ol>
+              </article>;
+            })}
+          </div>
         </div>
       </div>
     </section>
