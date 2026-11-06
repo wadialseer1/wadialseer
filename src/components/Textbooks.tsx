@@ -52,11 +52,25 @@ export function TextbooksSection() {
   return <section className="section-pad"><div className="container-site">
     <p className="font-bold text-primary">مكتبة الطالب</p>
     <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">الكتب المدرسية</h2>
-    <div className="mt-8 grid grid-cols-2 gap-4 border-y border-primary/25 py-6 lg:grid-cols-4">
+    <div className="mt-8 grid grid-cols-2 gap-4 border-y border-primary/25 py-6 lg:grid-cols-3">
       <BookFilter label="الصف الدراسي" value={grade} onChange={chooseGrade} options={grades} icon={BookOpenText} />
-      <BookFilter label="المادة" value={subject} onChange={setSubject} options={["الكل", ...subjects]} icon={Library} />
       <BookFilter label="الفصل" value={semester} onChange={setSemester} options={["الكل", "الفصل الأول", "الفصل الثاني", "كتب إضافية"]} icon={BookMarked} />
       <label className="min-w-0"><span className="mb-2 flex items-center gap-2 text-sm font-bold text-primary"><Search className="h-4 w-4" />البحث في الكتب</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="اسم المادة أو الكتاب" className="h-12 w-full rounded-md border border-input bg-card px-4 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" /></label>
+    </div>
+    <div className="mt-6" role="group" aria-label="اختر المادة">
+      <p className="mb-3 flex items-center gap-2 text-sm font-bold text-primary"><Library className="h-4 w-4" />جميع المواد</p>
+      <div className="flex flex-wrap gap-2">
+        {["الكل", ...subjects].map((item) => {
+          const Icon = item === "الكل" ? Library : subjectIcon(item);
+          const count = textbooks.filter((book) => book.grade === grade && (item === "الكل" || book.subject === item)).length;
+          const active = subject === item;
+          return <button key={item} type="button" onClick={() => setSubject(item)} aria-pressed={active}
+            className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-all duration-200 ${active ? "border-primary bg-primary text-primary-foreground shadow-gold" : "border-primary/30 bg-card text-foreground hover:-translate-y-0.5 hover:border-primary/70"}`}>
+            <Icon className="h-4 w-4" />{item === "الكل" ? "كل المواد" : item}
+            <span className={`rounded-full px-2 text-xs ${active ? "bg-primary-foreground/20" : "bg-secondary text-muted-foreground"}`}>{count}</span>
+          </button>;
+        })}
+      </div>
     </div>
     <p className="mt-6 text-sm font-semibold text-muted-foreground"><span className="text-info">{grade}</span> — {subject === "الكل" ? "جميع المواد" : subject} <span className="mr-2 text-primary">{groups.reduce((count, group) => count + group.books.length, 0)} كتاب</span></p>
     <div className="mt-5 grid items-start gap-6 lg:grid-cols-2">
