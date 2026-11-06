@@ -14,3 +14,4 @@
 - Shared ContactSection accepts a groups visibility flag so the dedicated contact page owns group browsing while the homepage provides a direct link.
 - Show all teachers grouped one card per subject, styled like the administration cards, so the full roster stays visible and consistent.
 - Use the shared native-select control for textbook and staff filters to avoid third-party select context dependencies and retain platform-native mobile picking.
+- The school assistant answers only from published site data assembled server-side in src/lib/school-knowledge.server.ts, so new content in src/data automatically becomes answerable.
