@@ -93,23 +93,18 @@ export function Hero() {
             </p>
           </Reveal>
           <Reveal delay={320}>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                to={routes.about}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground shadow-gold transition-transform hover:scale-[1.03]"
-              >
-                اكتشف المدرسة
-                <ArrowLeft className="h-4 w-4" />
+            <div className="mx-auto mt-10 grid w-full max-w-md gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center">
+              <Link to={routes.about} className="group btn-shine inline-flex min-h-13 items-center justify-center gap-2.5 rounded-2xl px-7 py-3.5 text-base font-bold transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring bg-gradient-to-l from-primary to-gold-soft text-primary-foreground shadow-gold">
+                <School className="h-5 w-5" />اكتشف المدرسة
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               </Link>
-              <Link
-                to={routes.contact}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-7 py-3.5 text-base font-bold text-foreground transition-colors hover:bg-accent"
-              >
-                تواصل معنا
+              <Link to={routes.contact} className="group btn-shine inline-flex min-h-13 items-center justify-center gap-2.5 rounded-2xl px-7 py-3.5 text-base font-bold transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring border border-primary/40 bg-card/60 text-foreground backdrop-blur-md hover:border-primary hover:text-primary">
+                <Phone className="h-5 w-5 text-primary" />تواصل معنا
               </Link>
-              <Button asChild className="h-auto min-h-12 whitespace-normal border border-whatsapp/40 bg-whatsapp px-6 py-3 font-bold text-whatsapp-foreground hover:bg-whatsapp/90">
-                <Link to={routes.contact} hash="whatsapp-groups"><WhatsappIcon className="h-5 w-5" />قروبات واتساب لأولياء الأمور<ArrowLeft className="h-4 w-4" /></Link>
-              </Button>
+              <Link to={routes.contact} hash="whatsapp-groups" className="group btn-shine inline-flex min-h-13 items-center justify-center gap-2.5 rounded-2xl px-7 py-3.5 text-base font-bold transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring border border-whatsapp/50 bg-whatsapp text-whatsapp-foreground shadow-premium hover:bg-whatsapp/90">
+                <WhatsappIcon className="h-5 w-5" />قروبات واتساب لأولياء الأمور
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              </Link>
             </div>
           </Reveal>
         </div>
