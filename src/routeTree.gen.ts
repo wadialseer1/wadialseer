@@ -18,7 +18,6 @@ import { Route as R5RouteImport } from './routes/5'
 import { Route as R6RouteImport } from './routes/6'
 import { Route as R7RouteImport } from './routes/7'
 import { Route as R8RouteImport } from './routes/8'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiPublicBookIdRouteImport } from './routes/api/public/book/$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -66,11 +65,6 @@ const R8Route = R8RouteImport.update({
   path: '/8',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicBookIdRoute = ApiPublicBookIdRouteImport.update({
   id: '/api/public/book/$id',
   path: '/api/public/book/$id',
@@ -87,7 +81,6 @@ export interface FileRoutesByFullPath {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
-  '/api/chat': typeof ApiChatRoute
   '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRoutesByTo {
@@ -100,7 +93,6 @@ export interface FileRoutesByTo {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
-  '/api/chat': typeof ApiChatRoute
   '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRoutesById {
@@ -114,7 +106,6 @@ export interface FileRoutesById {
   '/6': typeof R6Route
   '/7': typeof R7Route
   '/8': typeof R8Route
-  '/api/chat': typeof ApiChatRoute
   '/api/public/book/$id': typeof ApiPublicBookIdRoute
 }
 export interface FileRouteTypes {
@@ -129,7 +120,6 @@ export interface FileRouteTypes {
     | '/6'
     | '/7'
     | '/8'
-    | '/api/chat'
     | '/api/public/book/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -142,7 +132,6 @@ export interface FileRouteTypes {
     | '/6'
     | '/7'
     | '/8'
-    | '/api/chat'
     | '/api/public/book/$id'
   id:
     | '__root__'
@@ -155,7 +144,6 @@ export interface FileRouteTypes {
     | '/6'
     | '/7'
     | '/8'
-    | '/api/chat'
     | '/api/public/book/$id'
   fileRoutesById: FileRoutesById
 }
@@ -169,7 +157,6 @@ export interface RootRouteChildren {
   R6Route: typeof R6Route
   R7Route: typeof R7Route
   R8Route: typeof R8Route
-  ApiChatRoute: typeof ApiChatRoute
   ApiPublicBookIdRoute: typeof ApiPublicBookIdRoute
 }
 
@@ -238,13 +225,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R8RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/book/$id': {
       id: '/api/public/book/$id'
       path: '/api/public/book/$id'
@@ -265,7 +245,6 @@ const rootRouteChildren: RootRouteChildren = {
   R6Route: R6Route,
   R7Route: R7Route,
   R8Route: R8Route,
-  ApiChatRoute: ApiChatRoute,
   ApiPublicBookIdRoute: ApiPublicBookIdRoute,
 }
 export const routeTree = rootRouteImport
