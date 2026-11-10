@@ -16,7 +16,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SchoolSplash } from "@/components/SchoolSplash";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { SchoolAssistant } from "@/components/SchoolAssistant";
 
 
 function NotFoundComponent() {
@@ -142,7 +141,6 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <ScrollToTop />
-        <SchoolAssistant />
       </div>
     </QueryClientProvider>
   );
