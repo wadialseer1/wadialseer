@@ -15,17 +15,17 @@ import btecHealth from "@/assets/btec/health.jpg";
 import btecSport from "@/assets/btec/sport.jpg";
 import btecEarlyYears from "@/assets/btec/early-years.jpg";
 import btecEsports from "@/assets/btec/esports.jpg";
-import ajyalLogo from "@/assets/ajyal-logo.png.asset.json";
-import moeLogo from "@/assets/moe-logo.jpg.asset.json";
-import sirajLogo from "@/assets/siraj-logo.png.asset.json";
-import schoolLogo from "@/assets/logo.png.asset.json";
-import init1 from "@/assets/init-1.png.asset.json";
-import init2 from "@/assets/init-2.png.asset.json";
+import ajyalLogo from "@/assets/ajyal-logo.png";
+import moeLogo from "@/assets/moe-logo.jpg";
+import sirajLogo from "@/assets/siraj-logo.png";
+import schoolLogo from "@/assets/logo.png";
+import init1 from "@/assets/init-1.png";
+import init2 from "@/assets/init-2.png";
 import assembly1 from "@/assets/assembly-1.png";
 import assembly2 from "@/assets/assembly-2.png";
-import handballChampionship from "@/assets/handball-championship.png.asset.json";
+import handballChampionship from "@/assets/handball-championship.png";
 import { extraInitiatives } from "@/data/initiatives-extra";
-import darsakLogo from "@/assets/darsak-logo.png.asset.json";
+import darsakLogo from "@/assets/darsak-logo.png";
 
 const CDN = "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload";
 const wide = (id: string) => `${CDN}/c_limit,fl_lossy,h_1400,w_1600,f_auto,q_auto/${id}`;
@@ -54,7 +54,7 @@ export const school = {
     "الريادة",
     "الالتزام",
   ],
-  heroImage: init2.url,
+  heroImage: init2,
   address: "شارع عربي جرادات، حي غياضة، وادي السير، عمّان، الأردن",
   hours: "من 8:00 صباحًا إلى 4:00 مساءً",
   phone: "065823102",
@@ -258,13 +258,13 @@ export const initiatives: { title: string; date: string; paragraphs: string[]; i
     title: "لمدرستي أنتمي… وبالعطاء أرتقي",
     date: "",
     paragraphs: ["ضمن مبادرات «لمدرستي أنتمي»، وبروح التعاون والانتماء والمسؤولية، وبتوجيهات مدير المدرسة الاستاذ زيد الحسامي قام الأستاذ هيثم القرعان وطلاب الصف السادس بمبادرة جميلة تمثلت في تنظيف حديقة المدرسة والعناية بها، حرصًا منهم على أن تبقى مدرستنا بيئة جميلة ونظيفة وآمنة للجميع. كل الشكر والتقدير للأستاذ هيثم القرعان على جهوده وتوجيهه، ولأبنائنا طلبة الصف السادس على عطائهم ومبادرتهم الرائعة، فمدرستنا بيتنا، والمحافظة عليها مسؤوليتنا جميعًا. لمدرستي أنتمي… وبالعطاء أرتقي"],
-    images: [init1.url, init2.url],
+    images: [init1, init2],
   },
   {
     title: "المركز الأول في بطولة كرة اليد",
     date: "المرحلة الأساسية العليا",
     paragraphs: ["حصلت مدرسة وادي السير الأساسية للبنين على المركز الأول في بطولة كرة اليد للمرحلة الأساسية العليا على مستوى لواء وادي السير، وذلك بفوز أبطالنا في المباراة النهائية على مدرسة الشهيد الطيار فراس العجلوني بنتيجة ١٢–٧. كل الشكر والتقدير للأستاذ الكابتن علي أبو السندس على جهوده وإبداعه في البطولة، والشكر موصول لطلابنا الأبطال الذين أثبتوا بأنه لا يليق بهم إلا المركز الأول. وشكر خاص لأهاليهم الكرام ومعلمي التربية الرياضية، ونتمنى مزيدًا من النجاحات لجميع الفرق في مختلف الألعاب القادمة."],
-    images: [handballChampionship.url],
+    images: [handballChampionship],
   },
 ];
 
@@ -323,35 +323,35 @@ export const platforms: {
     short: "أجيال",
     description: "بيئة تعليمية رقمية متكاملة أطلقتها وزارة التربية والتعليم في الأردن لدعم التحول الرقمي وتطوير العملية التربوية.",
     url: "https://ajyal.moe.gov.jo/emis/login.aspx",
-    logo: ajyalLogo.url,
+    logo: ajyalLogo,
   },
   {
     name: "سراج – المساعد الدراسي الذكي",
     short: "سراج",
     description: "مساعد ذكي صُمّم خصيصًا لمساعدة طلاب المدارس في الأردن على الدراسة والتفوق، من خلال تجربة تعليمية تفاعلية وشاملة، تستند إلى المناهج الرسمية.",
     url: "https://siraj.moe.gov.jo/",
-    logo: sirajLogo.url,
+    logo: sirajLogo,
   },
   {
     name: "وزارة التربية والتعليم الأردنية",
     short: "وزارة التربية والتعليم",
     description: "وزارة التربية والتعليم وتنمية الموارد البشرية",
     url: "https://moe.gov.jo/",
-    logo: moeLogo.url,
+    logo: moeLogo,
   },
   {
     name: "منصة درسك",
     short: "درسك",
     description: "منصة للتعليم عن بُعد.",
     url: "https://darsak.gov.jo/",
-    logo: darsakLogo.url,
+    logo: darsakLogo,
   },
   {
     name: "فيسبوك المدرسة",
     short: "فيسبوك",
     description: "صفحة المدرسة الرسمية على فيسبوك.",
     url: school.facebook,
-    logo: schoolLogo.url,
+    logo: schoolLogo,
   },
 ];
 

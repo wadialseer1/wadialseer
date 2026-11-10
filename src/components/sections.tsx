@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Reveal } from "@/components/Reveal";
 import { useLightbox } from "@/components/Lightbox";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 import {
   administration,
   btecIntro,
@@ -73,7 +73,7 @@ export function Hero() {
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
             <img
-              src={logo.url}
+              src={logo}
               alt="شعار مدرسة وادي السير الأساسية للبنين"
               className="mx-auto h-28 w-28 rounded-3xl bg-foreground/95 object-contain p-2 shadow-premium sm:h-36 sm:w-36"
               width={144}

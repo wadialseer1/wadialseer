@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 import { school } from "@/data/school";
 
 export function SchoolSplash() {
@@ -21,7 +21,7 @@ export function SchoolSplash() {
     >
       <div className="flex flex-col items-center gap-5 px-6 text-center">
         <img
-          src={logo.url}
+          src={logo}
           alt=""
           className="h-24 w-24 animate-pulse rounded-3xl bg-foreground/95 object-contain p-2 sm:h-28 sm:w-28"
           width={112}

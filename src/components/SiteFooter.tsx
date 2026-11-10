@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 import { mapsUrl, routes, school } from "@/data/school";
 
 const links = [
@@ -22,7 +22,7 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-3">
             <img
-              src={logo.url}
+              src={logo}
               alt="شعار مدرسة وادي السير الأساسية للبنين"
               className="h-12 w-12 rounded-xl bg-foreground/95 object-contain p-1"
               width={48}
