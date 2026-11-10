@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 import { routes, school } from "@/data/school";
 
 const nav = [
@@ -25,7 +25,7 @@ export function SiteHeader() {
       <div className="container-site flex h-18 items-center justify-between gap-4 py-3">
         <Link to={routes.home} className="flex min-w-0 items-center gap-3">
           <img
-            src={logo.url}
+            src={logo}
             alt="شعار مدرسة وادي السير الأساسية للبنين"
             className="h-11 w-11 shrink-0 rounded-xl bg-foreground/95 object-contain p-1"
             width={44}
